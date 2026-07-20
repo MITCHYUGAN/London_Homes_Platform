@@ -734,11 +734,11 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4">
-                  <InstagramEmbed url="https://www.instagram.com/p/DaxZ3DyODIu/" width={328} height={600} captioned />
-                  <InstagramEmbed url="https://www.instagram.com/p/DQKL03VjFo_/" width={328} height={600} captioned />
-                  <InstagramEmbed url="https://www.instagram.com/p/DavL4b7DKA2/" width={328} height={600} captioned />
-                  <InstagramEmbed url="https://www.instagram.com/p/DaU8kLLuoBA/" width={328} height={600} captioned />
+                <div className="flex w-full flex-wrap items-center gap-[30px] justify-center lg:justify-between">
+                  <InstagramEmbed url="https://www.instagram.com/p/DaxZ3DyODIu/" width={400} height={660} captioned />
+                  <InstagramEmbed url="https://www.instagram.com/p/DQKL03VjFo_/" width={400} height={660} captioned />
+                  <InstagramEmbed url="https://www.instagram.com/p/DavL4b7DKA2/" width={400} height={660} captioned />
+                  {/* <InstagramEmbed url="https://www.instagram.com/p/DaU8kLLuoBA/" width={300} height={545} captioned /> */}
                 </div>
 
                 <button
