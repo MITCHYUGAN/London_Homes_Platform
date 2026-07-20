@@ -17,10 +17,10 @@ export const PROPERTIES: Property[] = [
     bathrooms: 6,
     areaSqM: 1250,
     description: 'An elite architectural tour-de-force poised on the premier waterfront row of Banana Island, offering unprecedented luxury, absolute security, and panoramic lagoon views.',
-    longDescription: 'Commanding a premier waterfront presence in Lagos’ most exclusive private enclave, The Obsidian Sovereign is an architectural masterpiece designed for the ultra-high-net-worth individual. Crafted with sleek glass columns, monolithic hand-cut basalt, and custom walnut carpentry, the estate integrates indoor and outdoor living fluidly. Spanning across three majestic levels, the home features automated double-height glass panels that slide away to reveal a spectacular 25-meter infinity pool melting into the Lagos lagoon. It features state-of-the-art Crestron home automation, a private deep-water jetty, a professional chef’s kitchen with Gaggenau appliances, a soundproof 12-seat private cinema, and a secure subterranean 10-car gallery.',
+    longDescription: "Commanding a premier waterfront presence in Lagos' most exclusive private enclave, The Obsidian Sovereign is an architectural masterpiece designed for the ultra-high-net-worth individual. Crafted with sleek glass columns, monolithic hand-cut basalt, and custom walnut carpentry, the estate integrates indoor and outdoor living fluidly. Spanning across three majestic levels, the home features automated double-height glass panels that slide away to reveal a spectacular 25-meter infinity pool melting into the Lagos lagoon. It features state-of-the-art Crestron home automation, a private deep-water jetty, a professional chef's kitchen with Gaggenau appliances, a soundproof 12-seat private cinema, and a secure subterranean 10-car gallery.",
     status: 'For Sale',
     images: [
-      '/src/assets/images/hero_banana_island_1783963760466.jpg',
+      '/images/hero_banana_island_1783963760466.jpg',
       'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1200&q=80'
@@ -65,7 +65,7 @@ export const PROPERTIES: Property[] = [
     longDescription: 'Perched in the heavens above Ikoyi, The Luminary Penthouse redefines sky-high luxury living in Lagos. This bespoke sky mansion spans an entire upper level of a newly completed premium architectural tower. Curated in collaboration with leading Milanese design houses, the interior features rich Calacatta gold marble, custom-engineered oak chevron flooring, and brushed bronze trims. The residence includes massive formal and informal living zones separated by a double-sided floating fireplace. The private master suite represents a personal sanctuary, containing a custom leather-clad boutique wardrobe, a deep-soaking solid stone bathtub overlooking the Lekki-Ikoyi Link Bridge, and a private steam shower. Step out onto the expansive private terrace featuring an outdoor kitchen and a glass-walled heated plunge pool.',
     status: 'For Sale',
     images: [
-      '/src/assets/images/luxury_ikoyi_penthouse_1783963776970.jpg',
+      '/images/luxury_ikoyi_penthouse_1783963776970.jpg',
       'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=1200&q=80'
@@ -109,7 +109,7 @@ export const PROPERTIES: Property[] = [
     longDescription: 'Situated in the premium residential quarter of Lekki Phase 1, The Zenith is a statement of modern design and computational intelligence. Striking architectural lines composed of raw off-shutter concrete, black matte steel panels, and elegant glass planes make this home an instant classic. Inside, the home is fully automated via Control4, allowing seamless voice, touch, and app commands over lighting, surround audio, climate, and active biometric security systems. The ground level features a magnificent floating cantilever stairway over an indoor reflection pool, leading into an open-plan formal lounge. The luxury chef’s kitchen is fitted with sleek handleless cabinets and integrated Bosch appliances. Outside, the lush tropical gardens surround a heated lap pool and lead to a third-story rooftop terrace complete with an open-air firepit.',
     status: 'For Sale',
     images: [
-      '/src/assets/images/lekki_luxury_villa_1783963791103.jpg',
+      '/images/lekki_luxury_villa_1783963791103.jpg',
       'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=80',
       'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80'
@@ -341,7 +341,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     id: 'n-banana',
     name: 'Banana Island',
     description: 'Often referred to as the ultimate billionaire enclave in Africa, Banana Island is a master-planned private peninsula offering ultra-exclusive security, paved boulevards, elite marinas, and world-class utilities.',
-    image: '/src/assets/images/hero_banana_island_1783963760466.jpg',
+    image: '/images/hero_banana_island_1783963760466.jpg',
     avgPrice: '₦1.2B – ₦4.5B',
     roi: '12% - 15%',
     vibe: 'Billionaires, Politicians, High-End Enclave',
@@ -352,7 +352,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     id: 'n-ikoyi',
     name: 'Ikoyi',
     description: 'The historic crown jewel of Lagos prestige. Combining leafy, serene tree-lined streets, premium residential skyscrapers, luxury golf courses, and upscale social clubs with high-yield commercial real estate.',
-    image: '/src/assets/images/luxury_ikoyi_penthouse_1783963776970.jpg',
+    image: '/images/luxury_ikoyi_penthouse_1783963776970.jpg',
     avgPrice: '₦800M – ₦2.5B',
     roi: '14%',
     vibe: 'Diplomats, Executives, Heritage Pride',
@@ -363,7 +363,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     id: 'n-lekki',
     name: 'Lekki Phase 1',
     description: 'The epicenter of modern lifestyle, creative commerce, and smart residential architecture in Lagos. High in demand for upscale commercial rental yields and luxury short-let holdings.',
-    image: '/src/assets/images/lekki_luxury_villa_1783963791103.jpg',
+    image: '/images/lekki_luxury_villa_1783963791103.jpg',
     avgPrice: '₦400M – ₦1.2B',
     roi: '10% - 13%',
     vibe: 'Entrepreneurs, Creatives, Dynamic Lifestyle',
@@ -374,7 +374,7 @@ export const NEIGHBORHOODS: Neighborhood[] = [
     id: 'n-vi',
     name: 'Victoria Island',
     description: 'The premium financial capital of Lagos. Combining multinational corporate headquarters, luxury serviced oceanfront towers, and international high-density commercial assets with secure luxury penthouses.',
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
+    image: '/images/photo-1486406146926-c627a92ad1ab.avif',
     avgPrice: '₦600M – ₦2.0B',
     roi: '15%',
     vibe: 'Global Business, Financial Elite, Coastal High-Rise',
@@ -460,7 +460,7 @@ export const ARTICLES: Article[] = [
       'Additionally, a massive volume of transactions in this premier segment is executed in stable foreign assets or full cash payments, keeping the sector entirely free from the risks of high interest rate mortgage defaults. Premium rentals in these enclaves command strong hard-currency payouts, giving luxury landlords reliable hedging advantages and robust annual rental yields of up to 10% on top of steady capital growth.',
       'For global diaspora investors, acquiring premium property in Lagos isn’t merely about home ownership—it is a secure, high-yield capital preservation strategy that outperforms traditional indices by significant margins.'
     ],
-    image: '/src/assets/images/hero_banana_island_1783963760466.jpg',
+    image: '/images/hero_banana_island_1783963760466.jpg',
     author: {
       name: 'Adewale Adeleke',
       role: 'Head of Investment Strategy',
@@ -480,7 +480,7 @@ export const ARTICLES: Article[] = [
       'Secondly, diaspora investors must transition away from utilizing personal family networks for transaction handlings. Partnering with a corporate brokerage that uses institutional escrow structures is critical. Escrow ensures that payments are safely held in trust and only disbursed to developers when independent engineering inspectors verify that construction milestones have been fully achieved.',
       'At London Homes, we guide our diaspora clients through this exact institutional process—carrying out rigorous physical site checkups, verifying state land registries, and securing absolute title ownership, so your hard-earned wealth is perfectly secure.'
     ],
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
+    image: '/images/photo-1600585154340-be6161a56a0c.avif',
     author: {
       name: 'Barrister Evelyn Onuoha',
       role: 'General Legal Counsel',
@@ -500,13 +500,13 @@ export const ARTICLES: Article[] = [
       'Furthermore, ensure that your purchase contract includes strict "penalty clauses for delays." A premium off-plan transaction should outline clear construction phases with associated payment milestones (e.g., 20% on foundation, 20% on carcass completion, etc.), rather than demanding large up-front payments.',
       'Lekki Phase 1 and Victoria Island currently represent hotbeds for premium off-plan residential towers. By entering early, securing flexible payment plans, and verifying construction quality, investors can easily capture massive equity appreciations upon completion.'
     ],
-    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80',
+    image: 'images/photo-1486406146926-c627a92ad1ab.avif',
     author: {
       name: 'Michael Cole',
       role: 'Director of Portfolio Management',
       avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&h=150&q=80'
     }
-  }
+  } 
 ];
 
 export const TESTIMONIALS: Testimonial[] = [

@@ -55,7 +55,7 @@ export default function Header({ currentPage, setCurrentPage, onBookInspection }
       <div className="max-w-full mx-auto px-6 lg:px-12 flex items-center justify-between">
         {/* Brand Logo */}
         <div className="flex items-center gap-2">
-          <img src="/src/assets/images/logo.png" className="w-[70px]" alt="" />
+          <img src="/images/logo.png" className="w-[70px]" alt="" />
           <button id="logo-btn" onClick={() => handleNavClick("home")} className="flex flex-col items-start group text-left focus:outline-none cursor-pointer">
             <span className="font-sans text-[20px] font-extrabold tracking-tighter uppercase leading-none text-[#000000] transition-colors duration-300 group-hover:text-[#622219]">London Homes</span>
             <span className="font-sans text-[8px] uppercase tracking-[0.1em] mt-1 text-[#622219]">Your Comfort, Our Priority</span>

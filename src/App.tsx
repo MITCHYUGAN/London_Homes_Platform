@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import React, { useState, useEffect, useRef } from "react";
 import {
   Search,
@@ -209,9 +204,9 @@ export default function App() {
               {/* Background Video - Cinematic Drone View of City Skyline at Sunset */}
               <div className="absolute inset-0 z-0">
                 <video autoPlay muted loop playsInline className="w-full h-full object-cover opacity-60 filter saturate-110">
-                  <source src="/src/assets/videos/drone-video.mp4" type="video/mp4" />
+                  <source src="/videos/drone-video.mp4" type="video/mp4" />
                   {/* Fallback image */}
-                  <img src="/src/assets/images/hero_banana_island_1783963760466.jpg" alt="Banana Island Luxury Drone Footage Placeholder" className="w-full h-full object-cover opacity-60" />
+                  <img src="/images/hero_banana_island_1783963760466.jpg" alt="Banana Island Luxury Drone Footage Placeholder" className="w-full h-full object-cover opacity-60" />
                 </video>
                 <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60 z-1" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent z-1" />
@@ -522,7 +517,7 @@ export default function App() {
                       id="diaspora-spotlight-video"
                       src={`https://www.youtube.com/embed/VuPsrZDFODA`}
                       // src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-luxury-mansion-with-pool-42861-large.mp4"
-                      // poster="/src/assets/images/luxury_ikoyi_penthouse_1783963776970.jpg"
+                      // poster="/images/luxury_ikoyi_penthouse_1783963776970.jpg"
                       title="Cinematic Property Walkthrough Tour"
                       onExpand={(url) => setActiveVideoUrl(url)}
                     /> */}
@@ -754,7 +749,7 @@ export default function App() {
             <section id="footer-cta" className="relative py-28 lg:py-36 bg-[#111111] text-white overflow-hidden">
               <div className="absolute inset-0 z-0">
                 <img
-                  src="/src/assets/images/hero_banana_island_1783963760466.jpg"
+                  src="/images/hero_banana_island_1783963760466.jpg"
                   alt="Elite Background Footer"
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover opacity-20 filter grayscale blur-[1px]"
@@ -1629,7 +1624,7 @@ export default function App() {
               </div>
 
               <div className="aspect-16/10 w-full bg-gray-100 overflow-hidden border border-[#ECECEC]">
-                <img src="/src/assets/images/hero_banana_island_1783963760466.jpg" alt="Banana Island drone photography" referrerPolicy="no-referrer" className="w-full h-full object-cover" />
+                <img src="/images/hero_banana_island_1783963760466.jpg" alt="Banana Island drone photography" referrerPolicy="no-referrer" className="w-full h-full object-cover" />
               </div>
             </div>
 
@@ -1674,19 +1669,19 @@ export default function App() {
                   {
                     name: "Anthony London",
                     role: "Chief Executive Officer",
-                    avatar: "/src/assets/images/ceo_img.png",
+                    avatar: "/images/ceo_img.png",
                     desc: "5yrs+ in high-value asset banking and luxury acquisitions across London and Lagos.",
                   },
                   {
                     name: "Kofi Adeleke",
                     role: "Head of Legal & Title Due Diligence",
-                    avatar: "/src/assets/images/head-of-legal-and-title_img.png",
+                    avatar: "/images/head-of-legal-and-title_img.png",
                     desc: "Specialist in Lagos State land dispute resolution and statutory Governor's Consent files processing.",
                   },
                   {
                     name: "Mitchell D.",
                     role: "Digital Systems Engineer",
-                    avatar: "/src/assets/images/digital-systems-engineer_img.jpeg",
+                    avatar: "/images/digital-systems-engineer_img.jpeg",
                     desc: "Creating modern digital products that improve customer experience and business performance.",
                   },
                 ].map((lead, idx) => (
@@ -1724,25 +1719,25 @@ export default function App() {
                   id: "VuPsrZDFODA",
                   title: "Touring an Ultra-Luxury 5 Bedroom Mansion in VGC Lagos | Pool, Cinema, Gym & Rooftop - ₦850M",
                   duration: "12:09 mins",
-                  img: "/src/assets/images/Ultra-Luxury-5-Bedroom-Mansion-in-VGC-Lagos.png",
+                  img: "/images/Ultra-Luxury-5-Bedroom-Mansion-in-VGC-Lagos.png",
                 },
                 {
                   id: "ycNRiq7LAvM",
                   title: "Massive Change Coming! Lekki-Ajah Road Rehabilitation & What It Means for Real Estate Buyers",
                   duration: "09:35 mins",
-                  img: "/src/assets/images/Lekki-Ajah-Road-Rehabilitation_img.png",
+                  img: "/images/Lekki-Ajah-Road-Rehabilitation_img.png",
                 },
                 {
                   id: "NW0zb4-71iA",
                   title: "Factors to Consider When Buying a Home: A Comprehensive Guide",
                   duration: "06:40 mins",
-                  img: "/src/assets/images/Factors-to-Consider-When-Buying-a-Home_img.png",
+                  img: "/images/Factors-to-Consider-When-Buying-a-Home_img.png",
                 },
                 {
                   id: "t241N6tcfAg",
                   title: "Royal Garden Estate luxury home.",
                   duration: "03:40 mins",
-                  img: "/src/assets/images/Royal-Garden-Estate-luxury-home_img.png",
+                  img: "/images/Royal-Garden-Estate-luxury-home_img.png",
                 },
               ].map((vid) => (
                 <div key={vid.id} className="group space-y-4">
