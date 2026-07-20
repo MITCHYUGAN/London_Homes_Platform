@@ -31,10 +31,10 @@ export default function Header({ currentPage, setCurrentPage, onBookInspection }
   const navItems = [
     { id: "home", label: "Home" },
     { id: "properties", label: "Properties" },
-    { id: "services", label: "Services" },
-    { id: "invest", label: "Investment Guide" },
     { id: "about", label: "About" },
+    { id: "services", label: "Services" },
     { id: "media", label: "Media" },
+    { id: "invest", label: "Investment Guide" },
     { id: "blog", label: "Insights" },
     { id: "contact", label: "Contact" },
   ];

@@ -45,6 +45,7 @@ import RoiCalculator from "./components/RoiCalculator";
 import LuxuryViewportVideo from "./components/LuxuryViewportVideo";
 import { PROPERTIES, NEIGHBORHOODS, SERVICES, ARTICLES, TESTIMONIALS } from "./data";
 import { Property, Article } from "./types";
+import { InstagramEmbed } from "react-social-media-embed";
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<string>("home");
@@ -533,7 +534,6 @@ export default function App() {
                         frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowFullScreen
-                        
                       />
                     </div>
                   </div>
@@ -714,6 +714,39 @@ export default function App() {
                     </article>
                   ))}
                 </div>
+              </div>
+            </section>
+
+            {/* SECTION: CHECK US OUT ON IG */}
+            <section id="insights-home" className="py-24 lg:py-32 bg-[#F8F8F8] border-t border-[#ECECEC]">
+              <div className="max-w-[1440px] mx-auto px-6 lg:px-12 space-y-16 flex flex-col items-center">
+                <div className="flex flex-col w-full md:flex-row md:items-end justify-between gap-6">
+                  <div className="space-y-3">
+                    <span className="text-xs uppercase font-extrabold tracking-[0.3em] text-[#622219]">MEDIA & STORIES</span>
+                    <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-none">WE ARE IN INSTAGRAM</h2>
+                  </div>
+                  <div>
+                    <a href="https://www.instagram.com/londonhomeslimited" target="_blank">
+                      <button className="text-xs uppercase font-semibold tracking-widest border-b border-[#111111] pb-1 hover:text-[#622219] hover:border-[#622219] transition-all cursor-pointer">
+                        Check us out on IG
+                      </button>
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4">
+                  <InstagramEmbed url="https://www.instagram.com/p/DaxZ3DyODIu/" width={328} height={600} captioned />
+                  <InstagramEmbed url="https://www.instagram.com/p/DQKL03VjFo_/" width={328} height={600} captioned />
+                  <InstagramEmbed url="https://www.instagram.com/p/DavL4b7DKA2/" width={328} height={600} captioned />
+                  <InstagramEmbed url="https://www.instagram.com/p/DaU8kLLuoBA/" width={328} height={600} captioned />
+                </div>
+
+                <button
+                  onClick={() => setCurrentPage("media")}
+                  className="bg-[#111111] hover:bg-[#622219] text-white text-xs font-semibold uppercase tracking-widest px-8 py-4 transition-colors cursor-pointer"
+                >
+                  View More Media & Stories
+                </button>
               </div>
             </section>
 
@@ -1726,7 +1759,7 @@ export default function App() {
                     </div>
                     <span className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 text-[10px] text-white font-mono uppercase">{vid.duration}</span>
                   </div>
-                  
+
                   <div className="space-y-1">
                     <h3 className="font-sans text-base font-bold text-gray-900 group-hover:text-[#622219] transition-colors">{vid.title}</h3>
                     <p className="text-gray-400 text-xs">Exclusively produced by London Homes Media division</p>
@@ -1738,7 +1771,7 @@ export default function App() {
             {/* INSTAGRAM & SOCIAL REELS LAYOUT */}
             <div className="space-y-8 pt-12 border-t border-[#ECECEC]">
               <div className="space-y-2">
-                <span className="text-xs uppercase font-bold text-[#622219]">Instagram & Social Diaries</span>
+                <span className="text-xs uppercase font-bold text-[#622219]">{/* Instagram & */}Social Diaries</span>
                 <h3 className="font-sans text-xl font-bold uppercase tracking-tight text-gray-900">Behind the Scenes</h3>
                 <p className="text-gray-500 text-xs">Dynamic snippets captured by our field advisors during daily client handovers and site audits.</p>
               </div>
