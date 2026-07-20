@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 import {
   Search,
   SlidersHorizontal,
@@ -35,35 +35,35 @@ import {
   Clock,
   Sparkles,
   Volume2,
-  VolumeX
-} from 'lucide-react';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import PropertyCard from './components/PropertyCard';
-import InspectionModal from './components/InspectionModal';
-import RoiCalculator from './components/RoiCalculator';
-import LuxuryViewportVideo from './components/LuxuryViewportVideo';
-import { PROPERTIES, NEIGHBORHOODS, SERVICES, ARTICLES, TESTIMONIALS } from './data';
-import { Property, Article } from './types';
+  VolumeX,
+} from "lucide-react";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import PropertyCard from "./components/PropertyCard";
+import InspectionModal from "./components/InspectionModal";
+import RoiCalculator from "./components/RoiCalculator";
+import LuxuryViewportVideo from "./components/LuxuryViewportVideo";
+import { PROPERTIES, NEIGHBORHOODS, SERVICES, ARTICLES, TESTIMONIALS } from "./data";
+import { Property, Article } from "./types";
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<string>('home');
-  const [selectedPropertyId, setSelectedPropertyId] = useState<string>('prop-obsidian');
+  const [currentPage, setCurrentPage] = useState<string>("home");
+  const [selectedPropertyId, setSelectedPropertyId] = useState<string>("prop-obsidian");
   const [isInspectionModalOpen, setIsInspectionModalOpen] = useState(false);
   const [propertyForInspection, setPropertyForInspection] = useState<Property | null>(null);
 
   // Home Quick Search State
-  const [quickSearchLocation, setQuickSearchLocation] = useState('all');
-  const [quickSearchType, setQuickSearchType] = useState('all');
-  const [quickSearchBudget, setQuickSearchBudget] = useState('all');
+  const [quickSearchLocation, setQuickSearchLocation] = useState("all");
+  const [quickSearchType, setQuickSearchType] = useState("all");
+  const [quickSearchBudget, setQuickSearchBudget] = useState("all");
 
   // Properties Filtering State
-  const [filterLocation, setFilterLocation] = useState('all');
-  const [filterType, setFilterType] = useState('all');
-  const [filterStatus, setFilterStatus] = useState('all');
-  const [filterPrice, setFilterPrice] = useState('all');
-  const [filterBeds, setFilterBeds] = useState('all');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [filterLocation, setFilterLocation] = useState("all");
+  const [filterType, setFilterType] = useState("all");
+  const [filterStatus, setFilterStatus] = useState("all");
+  const [filterPrice, setFilterPrice] = useState("all");
+  const [filterBeds, setFilterBeds] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
   const [isGridMode, setIsGridMode] = useState(true);
 
   // FAQ Accordion State
@@ -78,10 +78,10 @@ export default function App() {
   const selectedProperty = PROPERTIES.find((p) => p.id === selectedPropertyId) || PROPERTIES[0];
 
   // Active contact form state
-  const [contactName, setContactName] = useState('');
-  const [contactEmail, setContactEmail] = useState('');
-  const [contactPhone, setContactPhone] = useState('');
-  const [contactMessage, setContactMessage] = useState('');
+  const [contactName, setContactName] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [contactPhone, setContactPhone] = useState("");
+  const [contactMessage, setContactMessage] = useState("");
   const [contactSuccess, setContactSuccess] = useState(false);
 
   // Video modal walkthrough state
@@ -95,18 +95,12 @@ export default function App() {
     e.stopPropagation();
     const iframe = lifestyleIframeRef.current;
     if (!iframe || !iframe.contentWindow) return;
-    
+
     if (isLifestyleMuted) {
-      iframe.contentWindow.postMessage(
-        JSON.stringify({ event: 'command', func: 'unMute', args: '' }),
-        '*'
-      );
+      iframe.contentWindow.postMessage(JSON.stringify({ event: "command", func: "unMute", args: "" }), "*");
       setIsLifestyleMuted(false);
     } else {
-      iframe.contentWindow.postMessage(
-        JSON.stringify({ event: 'command', func: 'mute', args: '' }),
-        '*'
-      );
+      iframe.contentWindow.postMessage(JSON.stringify({ event: "command", func: "mute", args: "" }), "*");
       setIsLifestyleMuted(true);
     }
   };
@@ -134,32 +128,32 @@ export default function App() {
     setFilterLocation(quickSearchLocation);
     setFilterType(quickSearchType);
     setFilterPrice(quickSearchBudget);
-    setCurrentPage('properties');
+    setCurrentPage("properties");
   };
 
   // Filter properties logic
   const filteredProperties = PROPERTIES.filter((prop) => {
-    const matchesLocation = filterLocation === 'all' || prop.location === filterLocation;
-    const matchesType = filterType === 'all' || prop.type === filterType;
+    const matchesLocation = filterLocation === "all" || prop.location === filterLocation;
+    const matchesType = filterType === "all" || prop.type === filterType;
     const matchesStatus =
-      filterStatus === 'all' ||
-      (filterStatus === 'For Sale' && prop.status === 'For Sale') ||
-      (filterStatus === 'For Rent' && prop.status === 'For Rent') ||
-      (filterStatus === 'Short Let' && prop.status === 'Short Let') ||
-      (filterStatus === 'Just Sold' && prop.status === 'Just Sold') ||
-      (filterStatus === 'Recently Leased' && prop.status === 'Recently Leased');
+      filterStatus === "all" ||
+      (filterStatus === "For Sale" && prop.status === "For Sale") ||
+      (filterStatus === "For Rent" && prop.status === "For Rent") ||
+      (filterStatus === "Short Let" && prop.status === "Short Let") ||
+      (filterStatus === "Just Sold" && prop.status === "Just Sold") ||
+      (filterStatus === "Recently Leased" && prop.status === "Recently Leased");
 
-    const matchesBeds = filterBeds === 'all' || prop.bedrooms === Number(filterBeds);
+    const matchesBeds = filterBeds === "all" || prop.bedrooms === Number(filterBeds);
 
     let matchesPrice = true;
-    if (filterPrice !== 'all') {
-      if (filterPrice === 'under-500m') matchesPrice = prop.price < 500000000;
-      else if (filterPrice === '500m-1b') matchesPrice = prop.price >= 500000000 && prop.price <= 1000000000;
-      else if (filterPrice === 'over-1b') matchesPrice = prop.price > 1000000000;
+    if (filterPrice !== "all") {
+      if (filterPrice === "under-500m") matchesPrice = prop.price < 500000000;
+      else if (filterPrice === "500m-1b") matchesPrice = prop.price >= 500000000 && prop.price <= 1000000000;
+      else if (filterPrice === "over-1b") matchesPrice = prop.price > 1000000000;
     }
 
     const matchesSearch =
-      searchQuery === '' ||
+      searchQuery === "" ||
       prop.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       prop.location.toLowerCase().includes(searchQuery.toLowerCase()) ||
       prop.description.toLowerCase().includes(searchQuery.toLowerCase());
@@ -172,10 +166,10 @@ export default function App() {
     e.preventDefault();
     if (contactName && contactEmail && contactPhone) {
       setContactSuccess(true);
-      setContactName('');
-      setContactEmail('');
-      setContactPhone('');
-      setContactMessage('');
+      setContactName("");
+      setContactEmail("");
+      setContactPhone("");
+      setContactMessage("");
       setTimeout(() => setContactSuccess(false), 5000);
     }
   };
@@ -188,16 +182,12 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#FFFFFF] text-gray-900 font-sans selection:bg-[#622219]/10 selection:text-[#622219] flex flex-col justify-between">
       {/* Dynamic Header */}
-      <Header
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        onBookInspection={handleOpenGeneralInspection}
-      />
+      <Header currentPage={currentPage} setCurrentPage={setCurrentPage} onBookInspection={handleOpenGeneralInspection} />
 
       {/* Floating WhatsApp CTA */}
       <a
         id="floating-whatsapp-cta"
-        href="https://wa.me/2348031234567?text=Hello%20London%20Homes,%20I%20am%20interested%20in%20arranging%20a%20luxury%20property%20inspection%20in%20Lagos."
+        href="https://wa.me/2348032659756?text=Hello%20London%20Homes,%20I%20am%20interested%20in%20arranging%20a%20luxury%20property%20inspection%20in%20Lagos."
         target="_blank"
         rel="noreferrer"
         className="fixed bottom-6 right-6 z-40 bg-[#25D366] hover:bg-[#20ba5a] text-white p-4 rounded-full shadow-2xl hover:scale-105 transition-all flex items-center justify-center border border-white/20"
@@ -211,28 +201,16 @@ export default function App() {
         {/* ========================================================= */}
         {/* PAGE: HOME */}
         {/* ========================================================= */}
-        {currentPage === 'home' && (
+        {currentPage === "home" && (
           <div id="home-view" className="animate-fade-in">
             {/* SECTION: LUXURY HERO */}
             <section id="luxury-hero" className="relative h-[95vh] flex items-center justify-center bg-black overflow-hidden">
               {/* Background Video - Cinematic Drone View of City Skyline at Sunset */}
               <div className="absolute inset-0 z-0">
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="w-full h-full object-cover opacity-60 filter saturate-110"
-                >
-                  <source src="/drone video.mp4" type="video/mp4" />
-                  <source src="/drone_video.mp4" type="video/mp4" />
-                  <source src="https://assets.mixkit.co/videos/preview/mixkit-modern-city-skyline-at-sunset-4147-large.mp4" type="video/mp4" />
+                <video autoPlay muted loop playsInline className="w-full h-full object-cover opacity-60 filter saturate-110">
+                  <source src="/src/assets/videos/drone-video.mp4" type="video/mp4" />
                   {/* Fallback image */}
-                  <img
-                    src="/src/assets/images/hero_banana_island_1783963760466.jpg"
-                    alt="Banana Island Luxury Drone Footage Placeholder"
-                    className="w-full h-full object-cover opacity-60"
-                  />
+                  <img src="/src/assets/images/hero_banana_island_1783963760466.jpg" alt="Banana Island Luxury Drone Footage Placeholder" className="w-full h-full object-cover opacity-60" />
                 </video>
                 <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60 z-1" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent z-1" />
@@ -240,7 +218,7 @@ export default function App() {
 
               {/* Luxury Accent Float - Context Rail (Artistic Flair) */}
               <div className="absolute left-8 top-1/2 -translate-y-1/2 hidden xl:flex flex-col justify-between h-[200px] items-center z-10 select-none pointer-events-none">
-                <div className="rotate-180 flex items-center gap-3" style={{ writingMode: 'vertical-rl' }}>
+                <div className="rotate-180 flex items-center gap-3" style={{ writingMode: "vertical-rl" }}>
                   <span className="text-[10px] uppercase tracking-[0.4em] text-white/50 font-extrabold">Estd. 2018 — Lagos</span>
                 </div>
                 <div className="flex flex-col gap-3">
@@ -264,7 +242,7 @@ export default function App() {
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
                   <button
-                    onClick={() => setCurrentPage('properties')}
+                    onClick={() => setCurrentPage("properties")}
                     className="w-full sm:w-auto bg-[#D11D1F] hover:bg-[#622219] text-white text-xs font-bold uppercase tracking-widest px-8 py-4 transition-colors cursor-pointer"
                   >
                     Examine Portfolio
@@ -305,10 +283,7 @@ export default function App() {
 
             {/* SECTION: QUICK PROPERTY SEARCH ENGINE */}
             <section id="quick-search" className="relative z-20 max-w-6xl mx-auto px-6 -mt-16 md:-mt-20">
-              <form
-                onSubmit={handleQuickSearch}
-                className="bg-white border border-[#ECECEC] shadow-2xl p-6 lg:p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
-              >
+              <form onSubmit={handleQuickSearch} className="bg-white border border-[#ECECEC] shadow-2xl p-6 lg:p-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div className="space-y-1.5 border-b sm:border-b-0 sm:border-r border-[#ECECEC] pb-4 sm:pb-0 sm:pr-4">
                   <label className="block text-[10px] uppercase tracking-widest font-bold text-gray-400">Territory</label>
                   <select
@@ -373,22 +348,20 @@ export default function App() {
               <div className="max-w-[1440px] mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
                 <div className="space-y-8">
                   <div className="space-y-3">
-                    <span className="text-xs uppercase font-extrabold tracking-[0.3em] text-[#622219]">
-                      Beyond Average Brokerages
-                    </span>
-                    <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-tight">
-                      Why Global Investors Transact Through London Homes.
-                    </h2>
+                    <span className="text-xs uppercase font-extrabold tracking-[0.3em] text-[#622219]">Beyond Average Brokerages</span>
+                    <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-tight">Why Global Investors Transact Through London Homes.</h2>
                   </div>
                   <p className="text-gray-500 text-base leading-relaxed font-light">
-                    In Lagos real estate, the bottleneck is never inventory. It is trust, verified title clarity, and transaction security. London Homes was founded to eliminate risk, serving as an institutional gateway for local families and returning diaspora looking to build wealth safely.
+                    In Lagos real estate, the bottleneck is never inventory. It is trust, verified title clarity, and transaction security. London Homes was founded to eliminate risk, serving as an
+                    institutional gateway for local families and returning diaspora looking to build wealth safely.
                   </p>
                   <p className="text-gray-500 text-base leading-relaxed font-light">
-                    Every property on our roster undergoes exhaustive three-layer legal validation, ensuring 100% clean title status, free of disputable allocations or local family entanglements. We secure your investment through certified third-party bank escrows.
+                    Every property on our roster undergoes exhaustive three-layer legal validation, ensuring 100% clean title status, free of disputable allocations or local family entanglements. We
+                    secure your investment through certified third-party bank escrows.
                   </p>
                   <div className="pt-4">
                     <button
-                      onClick={() => setCurrentPage('about')}
+                      onClick={() => setCurrentPage("about")}
                       className="text-gray-900 hover:text-[#622219] font-bold text-xs uppercase tracking-widest flex items-center space-x-2 group/btn cursor-pointer"
                     >
                       <span>Study Our Secure Framework</span>
@@ -404,9 +377,7 @@ export default function App() {
                       <ShieldCheck className="w-6 h-6" />
                     </div>
                     <h3 className="font-sans text-base font-bold text-gray-900">100% Title Verification</h3>
-                    <p className="text-gray-500 text-xs leading-relaxed font-light">
-                      Every asset has certified Certificate of Occupancy (C of O) and Governor’s Consent checks before publishing.
-                    </p>
+                    <p className="text-gray-500 text-xs leading-relaxed font-light">Every asset has certified Certificate of Occupancy (C of O) and Governor’s Consent checks before publishing.</p>
                   </div>
 
                   <div className="p-8 bg-[#F8F8F8] border border-[#ECECEC] space-y-4">
@@ -414,9 +385,7 @@ export default function App() {
                       <Layers className="w-6 h-6" />
                     </div>
                     <h3 className="font-sans text-base font-bold text-gray-900">Secure Escrow Milestone Contracts</h3>
-                    <p className="text-gray-500 text-xs leading-relaxed font-light">
-                      Funds for off-plan purchases are released in secure phases verified by our independent civil engineers.
-                    </p>
+                    <p className="text-gray-500 text-xs leading-relaxed font-light">Funds for off-plan purchases are released in secure phases verified by our independent civil engineers.</p>
                   </div>
 
                   <div className="p-8 bg-[#F8F8F8] border border-[#ECECEC] space-y-4">
@@ -424,9 +393,7 @@ export default function App() {
                       <Award className="w-6 h-6" />
                     </div>
                     <h3 className="font-sans text-base font-bold text-gray-900">Bespoke Concierge Care</h3>
-                    <p className="text-gray-500 text-xs leading-relaxed font-light">
-                      Chauffeured viewings, complete airport pickups for diaspora clients, and seamless asset handover management.
-                    </p>
+                    <p className="text-gray-500 text-xs leading-relaxed font-light">Chauffeured viewings, complete airport pickups for diaspora clients, and seamless asset handover management.</p>
                   </div>
 
                   <div className="p-8 bg-[#F8F8F8] border border-[#ECECEC] space-y-4">
@@ -434,9 +401,7 @@ export default function App() {
                       <TrendingUp className="w-6 h-6" />
                     </div>
                     <h3 className="font-sans text-base font-bold text-gray-900">Data-Backed Projections</h3>
-                    <p className="text-gray-500 text-xs leading-relaxed font-light">
-                      No marketing exaggerations. Real comparative neighborhood yield metrics and capital valuation statistics.
-                    </p>
+                    <p className="text-gray-500 text-xs leading-relaxed font-light">No marketing exaggerations. Real comparative neighborhood yield metrics and capital valuation statistics.</p>
                   </div>
                 </div>
               </div>
@@ -447,20 +412,16 @@ export default function App() {
               <div className="max-w-[1440px] mx-auto px-6 lg:px-12 space-y-16">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                   <div className="space-y-3">
-                    <span className="text-xs uppercase font-extrabold tracking-[0.3em] text-[#622219]">
-                      Curated Masterpieces
-                    </span>
-                    <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-none">
-                      Featured Holdings
-                    </h2>
+                    <span className="text-xs uppercase font-extrabold tracking-[0.3em] text-[#622219]">Curated Masterpieces</span>
+                    <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-none">Featured Holdings</h2>
                   </div>
                   <div>
                     <button
                       onClick={() => {
-                        setFilterLocation('all');
-                        setFilterType('all');
-                        setFilterStatus('all');
-                        setCurrentPage('properties');
+                        setFilterLocation("all");
+                        setFilterType("all");
+                        setFilterStatus("all");
+                        setCurrentPage("properties");
                       }}
                       className="text-xs uppercase font-semibold tracking-widest border-b border-[#111111] pb-1 hover:text-[#622219] hover:border-[#622219] transition-all cursor-pointer"
                     >
@@ -479,7 +440,7 @@ export default function App() {
                         property={property}
                         onViewDetails={(id) => {
                           setSelectedPropertyId(id);
-                          setCurrentPage('property-details');
+                          setCurrentPage("property-details");
                         }}
                         onBookInspection={handleOpenInspectionForProperty}
                       />
@@ -517,12 +478,8 @@ export default function App() {
               <div className="max-w-[1440px] mx-auto px-6 lg:px-12 space-y-16">
                 <div className="text-center space-y-3 max-w-xl mx-auto">
                   <span className="text-xs uppercase font-extrabold tracking-[0.3em] text-[#622219]">Lagos Territories</span>
-                  <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-none">
-                    Prime Locations
-                  </h2>
-                  <p className="text-gray-500 text-sm leading-relaxed font-light">
-                    We exclusively list in enclaves of unmatched stability, security, and proven capital appreciation trends.
-                  </p>
+                  <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-none">Prime Locations</h2>
+                  <p className="text-gray-500 text-sm leading-relaxed font-light">We exclusively list in enclaves of unmatched stability, security, and proven capital appreciation trends.</p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -532,24 +489,17 @@ export default function App() {
                       className="group relative h-96 overflow-hidden border border-[#ECECEC] cursor-pointer"
                       onClick={() => {
                         setFilterLocation(hood.name);
-                        setFilterType('all');
-                        setFilterStatus('all');
-                        setCurrentPage('properties');
+                        setFilterType("all");
+                        setFilterStatus("all");
+                        setCurrentPage("properties");
                       }}
                     >
-                      <img
-                        src={hood.image}
-                        alt={hood.name}
-                        referrerPolicy="no-referrer"
-                        className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                      />
+                      <img src={hood.image} alt={hood.name} referrerPolicy="no-referrer" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                       <div className="absolute bottom-6 left-6 right-6 text-white space-y-2">
                         <span className="text-[10px] uppercase font-bold tracking-widest text-[#99B7DE]">Average Entry {hood.avgPrice}</span>
                         <h3 className="font-sans text-lg font-bold">{hood.name}</h3>
-                        <p className="text-gray-300 text-xs font-light line-clamp-2 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          {hood.description}
-                        </p>
+                        <p className="text-gray-300 text-xs font-light line-clamp-2 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">{hood.description}</p>
                         <div className="flex items-center space-x-1.5 pt-1 text-[10px] text-[#99B7DE] uppercase font-bold tracking-wider">
                           <span>ROI: {hood.roi}</span>
                           <span>•</span>
@@ -567,13 +517,25 @@ export default function App() {
               <div className="max-w-[1440px] mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
                 <div className="space-y-6 order-2 lg:order-1">
                   <div className="relative aspect-video w-full overflow-hidden shadow-2xl border border-[#ECECEC] rounded-xs">
-                    <LuxuryViewportVideo
+                    {/* <LuxuryViewportVideo
                       id="diaspora-spotlight-video"
-                      src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-luxury-mansion-with-pool-42861-large.mp4"
-                      poster="/src/assets/images/luxury_ikoyi_penthouse_1783963776970.jpg"
+                      src={`https://www.youtube.com/embed/VuPsrZDFODA`}
+                      // src="https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-luxury-mansion-with-pool-42861-large.mp4"
+                      // poster="/src/assets/images/luxury_ikoyi_penthouse_1783963776970.jpg"
                       title="Cinematic Property Walkthrough Tour"
                       onExpand={(url) => setActiveVideoUrl(url)}
-                    />
+                    /> */}
+                    <div style={{ overflow: "hidden", paddingBottom: "56.25%", position: "relative", height: 0 }}>
+                      <iframe
+                        style={{ left: 0, top: 0, height: "100%", width: "100%", position: "absolute" }}
+                        src={`https://www.youtube.com/embed/ycNRiq7LAvM`}
+                        title="YouTube video player"
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
+                        
+                      />
+                    </div>
                   </div>
                   <div className="grid grid-cols-3 gap-4 text-center">
                     <div className="bg-white p-4 border border-[#ECECEC] font-mono">
@@ -594,26 +556,26 @@ export default function App() {
                 <div className="space-y-8 order-1 lg:order-2">
                   <div className="space-y-3">
                     <span className="text-xs uppercase font-extrabold tracking-[0.3em] text-[#622219]">Capital Positioning</span>
-                    <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-tight">
-                      Confidently Invest in Lagos Off-Plan Ventures
-                    </h2>
+                    <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-tight">Confidently Invest in Lagos Off-Plan Ventures</h2>
                   </div>
                   <p className="text-gray-500 text-base leading-relaxed font-light">
-                    Lagos’ elite residential skyscrapers present some of the world’s ultimate arbitrage opportunities. Buying off-plan allows early-stage bookings at significant discounts, yielding secure, compounded gains of over 20% by structural handover.
+                    Lagos’ elite residential skyscrapers present some of the world’s ultimate arbitrage opportunities. Buying off-plan allows early-stage bookings at significant discounts, yielding
+                    secure, compounded gains of over 20% by structural handover.
                   </p>
                   <p className="text-gray-500 text-base leading-relaxed font-light">
-                    Our dynamic escrow disbursement frameworks protect you from unfinished delays. We verify builders, execute title registrations, and audit physical milestones continuously, keeping your capital 100% insulated.
+                    Our dynamic escrow disbursement frameworks protect you from unfinished delays. We verify builders, execute title registrations, and audit physical milestones continuously, keeping
+                    your capital 100% insulated.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 pt-2">
                     <button
-                      onClick={() => setCurrentPage('invest')}
+                      onClick={() => setCurrentPage("invest")}
                       className="bg-[#111111] hover:bg-[#622219] text-white text-xs font-semibold uppercase tracking-widest px-8 py-4 transition-colors cursor-pointer"
                     >
                       Run Yield Simulator
                     </button>
                     <button
                       onClick={() => {
-                        setCurrentPage('blog');
+                        setCurrentPage("blog");
                       }}
                       className="text-gray-900 hover:text-[#622219] text-xs font-bold uppercase tracking-widest flex items-center space-x-2 p-3 cursor-pointer"
                     >
@@ -626,7 +588,7 @@ export default function App() {
             </section>
 
             {/* SECTION: CINEMATIC LIFESTYLE LOOP (ULTRA LUXURY BANNER) */}
-            <section className="relative h-[65vh] flex items-center justify-center bg-black overflow-hidden select-none">
+            <section className="relative h-[65vh] flex items-center justify-center bg-black overflow-hidden">
               <div className="absolute inset-0 z-0">
                 {/* YouTube Background Player: loops and supports sound toggle */}
                 <iframe
@@ -638,7 +600,7 @@ export default function App() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/70 z-1" />
               </div>
-              
+
               <div className="relative z-10 max-w-4xl mx-auto text-center px-6 space-y-6">
                 <span className="text-[11px] uppercase tracking-[0.4em] text-[#99B7DE] font-extrabold block">The Heritage of Perfection</span>
                 <h3 className="font-serif text-2xl sm:text-3xl lg:text-4xl italic text-white leading-tight font-light drop-shadow-lg">
@@ -656,11 +618,7 @@ export default function App() {
                 className="absolute bottom-6 right-6 lg:bottom-8 lg:right-12 z-20 w-12 h-12 rounded-full border border-white/20 bg-black/40 backdrop-blur-md text-white hover:text-[#99B7DE] hover:border-white/50 flex items-center justify-center transition-all duration-300 shadow-lg cursor-pointer focus:outline-none"
                 title={isLifestyleMuted ? "Unmute Video" : "Mute Video"}
               >
-                {isLifestyleMuted ? (
-                  <VolumeX className="w-5 h-5" />
-                ) : (
-                  <Volume2 className="w-5 h-5 animate-pulse" />
-                )}
+                {isLifestyleMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5 animate-pulse" />}
               </button>
             </section>
 
@@ -669,9 +627,7 @@ export default function App() {
               <div className="max-w-[1440px] mx-auto px-6 lg:px-12 space-y-16">
                 <div className="text-center space-y-3 max-w-xl mx-auto">
                   <span className="text-xs uppercase font-extrabold tracking-[0.3em] text-[#622219]">Verified Success Stories</span>
-                  <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-none">
-                    Earning Client Trust
-                  </h2>
+                  <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-none">Earning Client Trust</h2>
                   <p className="text-gray-500 text-sm leading-relaxed font-light">
                     Listen to international medical professionals, energy partners, and diaspora investors who confidently acquired Lagos properties through us.
                   </p>
@@ -679,27 +635,20 @@ export default function App() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
                   {TESTIMONIALS.map((t) => (
-                    <div
-                      key={t.id}
-                      className="bg-[#F8F8F8] border border-[#ECECEC] p-8 lg:p-10 flex flex-col justify-between space-y-8"
-                    >
+                    <div key={t.id} className="bg-[#F8F8F8] border border-[#ECECEC] p-8 lg:p-10 flex flex-col justify-between space-y-8">
                       <div className="space-y-4">
                         <div className="flex items-center space-x-1 text-amber-500">
                           {Array.from({ length: t.rating }).map((_, i) => (
-                            <span key={i} className="text-lg">★</span>
+                            <span key={i} className="text-lg">
+                              ★
+                            </span>
                           ))}
                         </div>
-                        <p className="text-gray-600 text-sm leading-relaxed italic font-light">
-                          "{t.reviewText}"
-                        </p>
+                        <p className="text-gray-600 text-sm leading-relaxed italic font-light">"{t.reviewText}"</p>
                       </div>
 
                       <div className="flex items-center space-x-4 pt-4 border-t border-[#ECECEC]">
-                        <img
-                          src={t.avatar}
-                          alt={t.name}
-                          className="w-12 h-12 rounded-full object-cover border border-[#ECECEC]"
-                        />
+                        <img src={t.avatar} alt={t.name} className="w-12 h-12 rounded-full object-cover border border-[#ECECEC]" />
                         <div>
                           <h4 className="font-sans text-sm font-bold text-gray-900">{t.name}</h4>
                           <p className="text-gray-400 text-xs">{t.role}</p>
@@ -718,13 +667,11 @@ export default function App() {
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                   <div className="space-y-3">
                     <span className="text-xs uppercase font-extrabold tracking-[0.3em] text-[#622219]">Market Intelligence</span>
-                    <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-none">
-                      Latest Publications
-                    </h2>
+                    <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-none">Latest Publications</h2>
                   </div>
                   <div>
                     <button
-                      onClick={() => setCurrentPage('blog')}
+                      onClick={() => setCurrentPage("blog")}
                       className="text-xs uppercase font-semibold tracking-widest border-b border-[#111111] pb-1 hover:text-[#622219] hover:border-[#622219] transition-all cursor-pointer"
                     >
                       Browse All Insights
@@ -734,20 +681,10 @@ export default function App() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
                   {ARTICLES.map((art) => (
-                    <article
-                      key={art.id}
-                      className="group bg-white border border-[#ECECEC] overflow-hidden flex flex-col h-full hover:shadow-lg transition-all"
-                    >
+                    <article key={art.id} className="group bg-white border border-[#ECECEC] overflow-hidden flex flex-col h-full hover:shadow-lg transition-all">
                       <div className="relative aspect-video w-full overflow-hidden bg-gray-100">
-                        <img
-                          src={art.image}
-                          alt={art.title}
-                          referrerPolicy="no-referrer"
-                          className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                        />
-                        <span className="absolute top-4 left-4 bg-white px-3 py-1.5 text-[9px] uppercase font-bold tracking-wider border border-[#ECECEC]">
-                          {art.category}
-                        </span>
+                        <img src={art.image} alt={art.title} referrerPolicy="no-referrer" className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" />
+                        <span className="absolute top-4 left-4 bg-white px-3 py-1.5 text-[9px] uppercase font-bold tracking-wider border border-[#ECECEC]">{art.category}</span>
                       </div>
                       <div className="p-6 lg:p-8 flex-1 flex flex-col justify-between space-y-6">
                         <div className="space-y-3">
@@ -758,18 +695,16 @@ export default function App() {
                           </div>
                           <h3
                             onClick={() => {
-                              setCurrentPage('blog');
+                              setCurrentPage("blog");
                             }}
                             className="font-sans text-base font-bold text-gray-900 hover:text-[#622219] transition-colors leading-snug cursor-pointer line-clamp-2"
                           >
                             {art.title}
                           </h3>
-                          <p className="text-gray-500 text-xs leading-relaxed line-clamp-2">
-                            {art.excerpt}
-                          </p>
+                          <p className="text-gray-500 text-xs leading-relaxed line-clamp-2">{art.excerpt}</p>
                         </div>
                         <button
-                          onClick={() => setCurrentPage('blog')}
+                          onClick={() => setCurrentPage("blog")}
                           className="text-[#622219] font-bold text-xs uppercase tracking-widest flex items-center space-x-1.5 hover:text-[#D11D1F] cursor-pointer"
                         >
                           <span>Examine Article</span>
@@ -795,14 +730,13 @@ export default function App() {
               </div>
 
               <div className="relative z-10 max-w-4xl mx-auto px-6 text-center space-y-8">
-                <span className="text-[10px] uppercase font-bold tracking-[0.3em] text-[#99B7DE]">
-                  Confidential Representation
-                </span>
+                <span className="text-[10px] uppercase font-bold tracking-[0.3em] text-[#99B7DE]">Confidential Representation</span>
                 <h2 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-none uppercase">
                   Schedule an Elite <br className="hidden sm:inline" /> Private Inspection
                 </h2>
                 <p className="text-gray-400 text-sm sm:text-base leading-relaxed max-w-xl mx-auto font-light">
-                  Whether you are based locally or dialing in from Houston, London, or Toronto, let us host you. Enjoy absolute privacy, secure chauffeured transit, and direct negotiation transparency.
+                  Whether you are based locally or dialing in from Houston, London, or Toronto, let us host you. Enjoy absolute privacy, secure chauffeured transit, and direct negotiation
+                  transparency.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
@@ -813,7 +747,7 @@ export default function App() {
                     Arrange Private Viewing
                   </button>
                   <a
-                    href="https://wa.me/2348031234567"
+                    href="https://wa.me/2348032659756?text=Hi London Homes, I'm interested in a property I saw on your platform."
                     target="_blank"
                     rel="noreferrer"
                     className="w-full sm:w-auto bg-transparent hover:bg-white/5 text-white border border-gray-800 hover:border-gray-600 text-xs font-semibold uppercase tracking-widest px-8 py-4.5 transition-colors flex items-center justify-center space-x-2"
@@ -830,16 +764,12 @@ export default function App() {
         {/* ========================================================= */}
         {/* PAGE: PROPERTIES (PORTFOLIO SEARCH) */}
         {/* ========================================================= */}
-        {currentPage === 'properties' && (
+        {currentPage === "properties" && (
           <div id="portfolio-view" className="animate-fade-in max-w-[1440px] mx-auto px-6 lg:px-12 py-16 space-y-12">
             <div className="space-y-3">
               <span className="text-xs uppercase font-extrabold tracking-[0.3em] text-[#622219]">Exquisite Inventory</span>
-              <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-none">
-                Luxury Real Estate Portfolio
-              </h1>
-              <p className="text-gray-500 text-sm max-w-xl font-light">
-                Securely browse verified penthouses, off-plan projects, waterfront villas, and prime land plots available across Lagos.
-              </p>
+              <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-none">Luxury Real Estate Portfolio</h1>
+              <p className="text-gray-500 text-sm max-w-xl font-light">Securely browse verified penthouses, off-plan projects, waterfront villas, and prime land plots available across Lagos.</p>
             </div>
 
             {/* ADVANCED FILTERING DASHBOARD */}
@@ -863,14 +793,14 @@ export default function App() {
                   <div className="flex items-center space-x-2">
                     <button
                       onClick={() => setIsGridMode(true)}
-                      className={`p-2 border border-[#ECECEC] cursor-pointer ${isGridMode ? 'bg-black text-white' : 'bg-white text-gray-700 hover:bg-gray-100'}`}
+                      className={`p-2 border border-[#ECECEC] cursor-pointer ${isGridMode ? "bg-black text-white" : "bg-white text-gray-700 hover:bg-gray-100"}`}
                       aria-label="Grid view"
                     >
                       <Grid className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => setIsGridMode(false)}
-                      className={`p-2 border border-[#ECECEC] cursor-pointer ${!isGridMode ? 'bg-black text-white' : 'bg-white text-gray-700 hover:bg-gray-100'}`}
+                      className={`p-2 border border-[#ECECEC] cursor-pointer ${!isGridMode ? "bg-black text-white" : "bg-white text-gray-700 hover:bg-gray-100"}`}
                       aria-label="List view"
                     >
                       <List className="w-4 h-4" />
@@ -962,47 +892,57 @@ export default function App() {
               </div>
 
               {/* Active Filters Row */}
-              {(filterLocation !== 'all' || filterType !== 'all' || filterStatus !== 'all' || filterBeds !== 'all' || filterPrice !== 'all' || searchQuery !== '') && (
+              {(filterLocation !== "all" || filterType !== "all" || filterStatus !== "all" || filterBeds !== "all" || filterPrice !== "all" || searchQuery !== "") && (
                 <div className="flex flex-wrap items-center gap-3 pt-2 text-xs font-semibold">
                   <span className="text-gray-400">Active Criteria:</span>
-                  {filterLocation !== 'all' && (
+                  {filterLocation !== "all" && (
                     <span className="bg-white border border-[#ECECEC] text-[#622219] px-2 py-1 flex items-center space-x-1">
                       <span>{filterLocation}</span>
-                      <button onClick={() => setFilterLocation('all')} className="hover:text-black font-bold">×</button>
+                      <button onClick={() => setFilterLocation("all")} className="hover:text-black font-bold">
+                        ×
+                      </button>
                     </span>
                   )}
-                  {filterType !== 'all' && (
+                  {filterType !== "all" && (
                     <span className="bg-white border border-[#ECECEC] text-[#622219] px-2 py-1 flex items-center space-x-1">
                       <span>{filterType}</span>
-                      <button onClick={() => setFilterType('all')} className="hover:text-black font-bold">×</button>
+                      <button onClick={() => setFilterType("all")} className="hover:text-black font-bold">
+                        ×
+                      </button>
                     </span>
                   )}
-                  {filterStatus !== 'all' && (
+                  {filterStatus !== "all" && (
                     <span className="bg-white border border-[#ECECEC] text-[#622219] px-2 py-1 flex items-center space-x-1">
                       <span>{filterStatus}</span>
-                      <button onClick={() => setFilterStatus('all')} className="hover:text-black font-bold">×</button>
+                      <button onClick={() => setFilterStatus("all")} className="hover:text-black font-bold">
+                        ×
+                      </button>
                     </span>
                   )}
-                  {filterBeds !== 'all' && (
+                  {filterBeds !== "all" && (
                     <span className="bg-white border border-[#ECECEC] text-[#622219] px-2 py-1 flex items-center space-x-1">
                       <span>{filterBeds} Beds</span>
-                      <button onClick={() => setFilterBeds('all')} className="hover:text-black font-bold">×</button>
+                      <button onClick={() => setFilterBeds("all")} className="hover:text-black font-bold">
+                        ×
+                      </button>
                     </span>
                   )}
-                  {searchQuery !== '' && (
+                  {searchQuery !== "" && (
                     <span className="bg-white border border-[#ECECEC] text-[#622219] px-2 py-1 flex items-center space-x-1">
                       <span>"{searchQuery}"</span>
-                      <button onClick={() => setSearchQuery('')} className="hover:text-black font-bold">×</button>
+                      <button onClick={() => setSearchQuery("")} className="hover:text-black font-bold">
+                        ×
+                      </button>
                     </span>
                   )}
                   <button
                     onClick={() => {
-                      setFilterLocation('all');
-                      setFilterType('all');
-                      setFilterStatus('all');
-                      setFilterBeds('all');
-                      setFilterPrice('all');
-                      setSearchQuery('');
+                      setFilterLocation("all");
+                      setFilterType("all");
+                      setFilterStatus("all");
+                      setFilterBeds("all");
+                      setFilterPrice("all");
+                      setSearchQuery("");
                     }}
                     className="text-[#D11D1F] hover:underline cursor-pointer"
                   >
@@ -1023,7 +963,7 @@ export default function App() {
                         property={property}
                         onViewDetails={(id) => {
                           setSelectedPropertyId(id);
-                          setCurrentPage('property-details');
+                          setCurrentPage("property-details");
                         }}
                         onBookInspection={handleOpenInspectionForProperty}
                       />
@@ -1037,35 +977,29 @@ export default function App() {
                       >
                         {/* Left image column */}
                         <div className="relative md:w-[40%] bg-gray-100 aspect-video md:aspect-auto">
-                          <img
-                            src={property.images[0]}
-                            alt={property.title}
-                            className="object-cover w-full h-full transition-transform duration-1000 group-hover:scale-103"
-                          />
-                          <span className="absolute top-4 left-4 bg-white text-[#622219] border border-[#ECECEC] text-[9px] uppercase font-bold tracking-wider px-3 py-1">
-                            {property.status}
-                          </span>
+                          <img src={property.images[0]} alt={property.title} className="object-cover w-full h-full transition-transform duration-1000 group-hover:scale-103" />
+                          <span className="absolute top-4 left-4 bg-white text-[#622219] border border-[#ECECEC] text-[9px] uppercase font-bold tracking-wider px-3 py-1">{property.status}</span>
                         </div>
 
                         {/* Right details column */}
                         <div className="p-8 flex-1 flex flex-col justify-between">
                           <div className="space-y-4">
                             <div className="flex items-center justify-between text-xs text-gray-500 uppercase tracking-widest">
-                              <span>{property.type} in {property.location}</span>
+                              <span>
+                                {property.type} in {property.location}
+                              </span>
                               <span className="font-mono text-[#622219] font-semibold">{property.referenceId}</span>
                             </div>
                             <h3
                               onClick={() => {
                                 setSelectedPropertyId(property.id);
-                                setCurrentPage('property-details');
+                                setCurrentPage("property-details");
                               }}
                               className="font-sans text-xl font-bold text-gray-900 group-hover:text-[#622219] transition-colors leading-tight cursor-pointer"
                             >
                               {property.title}
                             </h3>
-                            <p className="text-gray-500 text-sm leading-relaxed max-w-xl font-light">
-                              {property.description}
-                            </p>
+                            <p className="text-gray-500 text-sm leading-relaxed max-w-xl font-light">{property.description}</p>
 
                             {/* Features highlights */}
                             <div className="flex flex-wrap gap-2 pt-2">
@@ -1102,14 +1036,12 @@ export default function App() {
 
                             <div className="flex items-center space-x-6">
                               <span className="font-mono text-xl font-bold text-gray-900">
-                                {property.status === 'Short Let'
-                                  ? `₦${(property.price / 1000).toFixed(0)}k / night`
-                                  : `₦${(property.price / 1000000).toFixed(0)} Million`}
+                                {property.status === "Short Let" ? `₦${(property.price / 1000).toFixed(0)}k / night` : `₦${(property.price / 1000000).toFixed(0)} Million`}
                               </span>
                               <button
                                 onClick={() => {
                                   setSelectedPropertyId(property.id);
-                                  setCurrentPage('property-details');
+                                  setCurrentPage("property-details");
                                 }}
                                 className="bg-[#111111] hover:bg-[#622219] text-white text-xs font-semibold uppercase tracking-widest px-6 py-3 transition-colors cursor-pointer"
                               >
@@ -1128,12 +1060,12 @@ export default function App() {
                 <p className="text-gray-500 font-medium">No luxury properties match your specific criteria.</p>
                 <button
                   onClick={() => {
-                    setFilterLocation('all');
-                    setFilterType('all');
-                    setFilterStatus('all');
-                    setFilterBeds('all');
-                    setFilterPrice('all');
-                    setSearchQuery('');
+                    setFilterLocation("all");
+                    setFilterType("all");
+                    setFilterStatus("all");
+                    setFilterBeds("all");
+                    setFilterPrice("all");
+                    setSearchQuery("");
                   }}
                   className="bg-black text-white text-xs uppercase font-semibold tracking-widest px-6 py-3 cursor-pointer hover:bg-[#622219]"
                 >
@@ -1160,9 +1092,7 @@ export default function App() {
                   </div>
                   <div className="space-y-1">
                     <span className="text-[10px] uppercase font-bold tracking-widest text-[#622219] block">GIS Property Tracking</span>
-                    <p className="text-gray-500 text-xs leading-relaxed">
-                      Lagos Land Registry validated plots coordinates mapped dynamically. To book a live chauffeured tour, click below.
-                    </p>
+                    <p className="text-gray-500 text-xs leading-relaxed">Lagos Land Registry validated plots coordinates mapped dynamically. To book a live chauffeured tour, click below.</p>
                   </div>
                   <button
                     onClick={handleOpenGeneralInspection}
@@ -1179,14 +1109,11 @@ export default function App() {
         {/* ========================================================= */}
         {/* PAGE: PROPERTY DETAILS */}
         {/* ========================================================= */}
-        {currentPage === 'property-details' && (
+        {currentPage === "property-details" && (
           <div id="property-details-view" className="animate-fade-in max-w-[1440px] mx-auto px-6 lg:px-12 py-16 space-y-12">
             {/* Navigation back and title row */}
             <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#ECECEC] pb-6">
-              <button
-                onClick={() => setCurrentPage('properties')}
-                className="text-gray-500 hover:text-black text-xs font-bold uppercase tracking-widest flex items-center space-x-1 cursor-pointer"
-              >
+              <button onClick={() => setCurrentPage("properties")} className="text-gray-500 hover:text-black text-xs font-bold uppercase tracking-widest flex items-center space-x-1 cursor-pointer">
                 <span>← Back to Portfolio</span>
               </button>
               <div className="flex items-center space-x-3 text-xs font-mono">
@@ -1199,17 +1126,13 @@ export default function App() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
               <div className="lg:col-span-2 space-y-4">
                 <div className="flex items-center space-x-2">
-                  <span className="bg-[#99B7DE]/20 text-gray-700 text-[10px] uppercase font-semibold tracking-wider px-3 py-1 rounded-xs">
-                    {selectedProperty.type}
-                  </span>
+                  <span className="bg-[#99B7DE]/20 text-gray-700 text-[10px] uppercase font-semibold tracking-wider px-3 py-1 rounded-xs">{selectedProperty.type}</span>
                   <span className="bg-emerald-50 text-emerald-700 text-[10px] uppercase font-semibold tracking-wider px-3 py-1 rounded-xs flex items-center space-x-1">
                     <ShieldCheck className="w-3 h-3" />
                     <span>Title Certified</span>
                   </span>
                 </div>
-                <h1 className="font-sans text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-gray-900 leading-tight">
-                  {selectedProperty.title}
-                </h1>
+                <h1 className="font-sans text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-gray-900 leading-tight">{selectedProperty.title}</h1>
                 <p className="text-gray-500 text-sm flex items-center space-x-1">
                   <MapPin className="w-4 h-4 text-[#622219] shrink-0" />
                   <span>Located in Lagos’ premier sector: {selectedProperty.location}</span>
@@ -1219,34 +1142,22 @@ export default function App() {
               {/* Price Callout */}
               <div className="bg-[#F8F8F8] border border-[#ECECEC] p-6 lg:p-8 space-y-1 lg:text-right flex flex-col justify-center">
                 <span className="text-[10px] uppercase tracking-widest font-semibold text-gray-400 block">Transactional Bracket</span>
-                <span className="font-mono text-2xl lg:text-3xl font-bold text-[#622219]">
-                  {formatNairaRaw(selectedProperty.price)}
-                </span>
-                {selectedProperty.status === 'For Rent' && <span className="text-xs text-gray-500 uppercase">per annum leasehold</span>}
-                {selectedProperty.status === 'Short Let' && <span className="text-xs text-gray-500 uppercase">per night serviced rate</span>}
-                {selectedProperty.status === 'Just Sold' && <span className="text-xs text-gray-500 uppercase font-semibold text-black">Successfully Closed</span>}
+                <span className="font-mono text-2xl lg:text-3xl font-bold text-[#622219]">{formatNairaRaw(selectedProperty.price)}</span>
+                {selectedProperty.status === "For Rent" && <span className="text-xs text-gray-500 uppercase">per annum leasehold</span>}
+                {selectedProperty.status === "Short Let" && <span className="text-xs text-gray-500 uppercase">per night serviced rate</span>}
+                {selectedProperty.status === "Just Sold" && <span className="text-xs text-gray-500 uppercase font-semibold text-black">Successfully Closed</span>}
               </div>
             </div>
 
             {/* EDITORIAL GALLERY CAROUSEL */}
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
               <div className="lg:col-span-3 aspect-16/9 bg-gray-100 overflow-hidden border border-[#ECECEC]">
-                <img
-                  src={selectedProperty.images[0]}
-                  alt={selectedProperty.title}
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover"
-                />
+                <img src={selectedProperty.images[0]} alt={selectedProperty.title} referrerPolicy="no-referrer" className="w-full h-full object-cover" />
               </div>
               <div className="grid grid-cols-3 lg:grid-cols-1 gap-4">
                 {selectedProperty.images.slice(1, 4).map((img, i) => (
                   <div key={i} className="aspect-video lg:aspect-auto lg:h-[135px] bg-gray-100 overflow-hidden border border-[#ECECEC]">
-                    <img
-                      src={img}
-                      alt={`${selectedProperty.title} Interior Detail ${i + 1}`}
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover"
-                    />
+                    <img src={img} alt={`${selectedProperty.title} Interior Detail ${i + 1}`} referrerPolicy="no-referrer" className="w-full h-full object-cover" />
                   </div>
                 ))}
               </div>
@@ -1274,9 +1185,7 @@ export default function App() {
               )}
               <div className="space-y-1 hidden lg:block">
                 <span className="text-gray-400 text-[10px] uppercase block">Valuation ROI</span>
-                <span className="text-base font-bold text-emerald-600">
-                  {selectedProperty.roiEstimate ? `+${selectedProperty.roiEstimate}% Projected` : 'Guaranteed Asset'}
-                </span>
+                <span className="text-base font-bold text-emerald-600">{selectedProperty.roiEstimate ? `+${selectedProperty.roiEstimate}% Projected` : "Guaranteed Asset"}</span>
               </div>
             </div>
 
@@ -1285,19 +1194,13 @@ export default function App() {
               {/* Left description narrative */}
               <div className="lg:col-span-2 space-y-8">
                 <div className="space-y-4">
-                  <h3 className="font-sans text-lg lg:text-xl font-bold text-gray-900 uppercase tracking-tight">
-                    Architectural Narrative
-                  </h3>
-                  <p className="text-gray-600 text-sm leading-relaxed font-light">
-                    {selectedProperty.longDescription || selectedProperty.description}
-                  </p>
+                  <h3 className="font-sans text-lg lg:text-xl font-bold text-gray-900 uppercase tracking-tight">Architectural Narrative</h3>
+                  <p className="text-gray-600 text-sm leading-relaxed font-light">{selectedProperty.longDescription || selectedProperty.description}</p>
                 </div>
 
                 {/* Features Checklist */}
                 <div className="space-y-4 pt-6 border-t border-[#ECECEC]">
-                  <h3 className="font-sans text-lg font-bold text-gray-900 uppercase tracking-tight">
-                    Distinguishing Characteristics
-                  </h3>
+                  <h3 className="font-sans text-lg font-bold text-gray-900 uppercase tracking-tight">Distinguishing Characteristics</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {selectedProperty.features.map((feature, idx) => (
                       <div key={idx} className="flex items-center space-x-3 text-sm text-gray-700">
@@ -1313,9 +1216,7 @@ export default function App() {
                 {/* Amenities Checklist */}
                 {selectedProperty.amenities.length > 0 && (
                   <div className="space-y-4 pt-6 border-t border-[#ECECEC]">
-                    <h3 className="font-sans text-lg font-bold text-gray-900 uppercase tracking-tight">
-                      Regulatory & Estate Infrastructure
-                    </h3>
+                    <h3 className="font-sans text-lg font-bold text-gray-900 uppercase tracking-tight">Regulatory & Estate Infrastructure</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       {selectedProperty.amenities.map((amenity, idx) => (
                         <div key={idx} className="flex items-center space-x-3 text-sm text-gray-600">
@@ -1329,16 +1230,12 @@ export default function App() {
 
                 {/* FLOO PLAN EMBED PLACEHOLDER */}
                 <div className="space-y-4 pt-6 border-t border-[#ECECEC]">
-                  <h3 className="font-sans text-lg font-bold text-gray-900 uppercase tracking-tight">
-                    Spatial Floor Layout Matrix
-                  </h3>
+                  <h3 className="font-sans text-lg font-bold text-gray-900 uppercase tracking-tight">Spatial Floor Layout Matrix</h3>
                   <div className="relative aspect-2/1 w-full bg-gray-50 border border-[#ECECEC] flex items-center justify-center font-mono text-[10px] text-gray-400">
                     <div className="absolute inset-0 bg-[radial-gradient(#dcdcdc_1.5px,transparent_1.5px)] [background-size:24px_24px] opacity-40" />
                     <div className="text-center space-y-2 p-4">
                       <span className="text-[10px] uppercase font-bold tracking-widest text-gray-500 block">Spatials Schematic Verified</span>
-                      <p className="text-gray-400 text-xs max-w-xs leading-relaxed">
-                        Exquisite CAD plans mapped and compiled securely. Available for direct digital download in PDF dossier.
-                      </p>
+                      <p className="text-gray-400 text-xs max-w-xs leading-relaxed">Exquisite CAD plans mapped and compiled securely. Available for direct digital download in PDF dossier.</p>
                       <button
                         onClick={() => alert("Exquisite CAD dossier download initiated securely.")}
                         className="text-xs uppercase font-bold text-[#622219] hover:text-black tracking-widest flex items-center space-x-1.5 mx-auto pt-2 cursor-pointer"
@@ -1351,15 +1248,11 @@ export default function App() {
                 </div>
 
                 {/* LUXURY INTERACTIVE MORTGAGE ESTIMATOR */}
-                {selectedProperty.status !== 'Just Sold' && selectedProperty.status !== 'Recently Leased' && (
+                {selectedProperty.status !== "Just Sold" && selectedProperty.status !== "Recently Leased" && (
                   <div id="mortgage-estimator" className="p-6 lg:p-8 border border-[#ECECEC] bg-[#F8F8F8] space-y-6">
                     <div className="space-y-1">
-                      <h4 className="text-base font-bold text-gray-900 uppercase tracking-tight">
-                        Capital Financing Estimation
-                      </h4>
-                      <p className="text-gray-500 text-xs">
-                        Simulate standard high-value private banking mortgage structures available through partner banks.
-                      </p>
+                      <h4 className="text-base font-bold text-gray-900 uppercase tracking-tight">Capital Financing Estimation</h4>
+                      <p className="text-gray-500 text-xs">Simulate standard high-value private banking mortgage structures available through partner banks.</p>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 font-mono text-xs">
@@ -1378,9 +1271,7 @@ export default function App() {
                           onChange={(e) => setMortgageDownPaymentPercent(Number(e.target.value))}
                           className="w-full accent-[#622219] bg-gray-200 h-1"
                         />
-                        <div className="text-[10px] text-gray-500">
-                          Cash Equity: {formatNairaRaw(Math.round(selectedProperty.price * (mortgageDownPaymentPercent / 100)))}
-                        </div>
+                        <div className="text-[10px] text-gray-500">Cash Equity: {formatNairaRaw(Math.round(selectedProperty.price * (mortgageDownPaymentPercent / 100)))}</div>
                       </div>
 
                       {/* Interest Rate */}
@@ -1423,11 +1314,9 @@ export default function App() {
                     {/* Monthly mortgage calculation */}
                     {(() => {
                       const principal = selectedProperty.price * (1 - mortgageDownPaymentPercent / 100);
-                      const monthlyRate = (mortgageInterestRate / 100) / 12;
+                      const monthlyRate = mortgageInterestRate / 100 / 12;
                       const numberOfPayments = mortgageTermYears * 12;
-                      const monthlyPayment =
-                        (principal * monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) /
-                        (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
+                      const monthlyPayment = (principal * monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
 
                       return (
                         <div className="bg-white border border-[#ECECEC] p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 font-mono">
@@ -1451,9 +1340,7 @@ export default function App() {
                 <span className="text-[10px] uppercase font-bold tracking-widest text-[#99B7DE]">Secure Private Inquiries</span>
                 <div className="space-y-2">
                   <h3 className="font-sans text-lg font-bold text-gray-900 uppercase">Coordinate Handover</h3>
-                  <p className="text-gray-500 text-xs font-light leading-relaxed">
-                    Arrange a private chauffeured viewing of {selectedProperty.title} or request more detail documents securely.
-                  </p>
+                  <p className="text-gray-500 text-xs font-light leading-relaxed">Arrange a private chauffeured viewing of {selectedProperty.title} or request more detail documents securely.</p>
                 </div>
 
                 <div className="space-y-4">
@@ -1464,7 +1351,7 @@ export default function App() {
                     Request Private Tour
                   </button>
                   <a
-                    href={`https://wa.me/2348031234567?text=Hello%20London%20Homes,%20I%20am%20interested%20in%20a%20private%20inspection%20for%20the%20property%20${selectedProperty.title}%20(REF:%20${selectedProperty.referenceId})`}
+                    href={`https://wa.me/2348032659756?text=Hello%20London%20Homes,%20I%20am%20interested%20in%20a%20private%20inspection%20for%20the%20property%20${selectedProperty.title}%20(REF:%20${selectedProperty.referenceId})`}
                     target="_blank"
                     rel="noreferrer"
                     className="w-full bg-transparent hover:bg-gray-50 text-gray-900 border border-gray-300 hover:border-black text-xs font-semibold uppercase tracking-widest py-4 transition-colors flex items-center justify-center space-x-2 text-center"
@@ -1489,9 +1376,7 @@ export default function App() {
 
             {/* RELATED PROPERTIES SEGMENT */}
             <div className="space-y-8 pt-12 border-t border-[#ECECEC]">
-              <h3 className="font-sans text-xl font-bold text-gray-900 uppercase tracking-tight">
-                Comparable Enclaves & Holdings
-              </h3>
+              <h3 className="font-sans text-xl font-bold text-gray-900 uppercase tracking-tight">Comparable Enclaves & Holdings</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {PROPERTIES.filter((p) => p.id !== selectedProperty.id)
                   .slice(0, 3)
@@ -1501,7 +1386,7 @@ export default function App() {
                       property={prop}
                       onViewDetails={(id) => {
                         setSelectedPropertyId(id);
-                        setCurrentPage('property-details');
+                        setCurrentPage("property-details");
                       }}
                       onBookInspection={handleOpenInspectionForProperty}
                     />
@@ -1514,47 +1399,31 @@ export default function App() {
         {/* ========================================================= */}
         {/* PAGE: SERVICES */}
         {/* ========================================================= */}
-        {currentPage === 'services' && (
+        {currentPage === "services" && (
           <div id="services-view" className="animate-fade-in max-w-[1440px] mx-auto px-6 lg:px-12 py-16 space-y-20">
             <div className="space-y-3">
               <span className="text-xs uppercase font-extrabold tracking-[0.3em] text-[#622219]">Certified Offerings</span>
-              <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-none">
-                Elite Real Estate Services
-              </h1>
-              <p className="text-gray-500 text-sm max-w-xl font-light">
-                Providing comprehensive due diligence, absolute contract privacy, and high-yield transactional advisory models.
-              </p>
+              <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-none">Elite Real Estate Services</h1>
+              <p className="text-gray-500 text-sm max-w-xl font-light">Providing comprehensive due diligence, absolute contract privacy, and high-yield transactional advisory models.</p>
             </div>
 
             {/* SERVICES LIST */}
             <div className="space-y-24">
               {SERVICES.map((serv, index) => (
-                <div
-                  key={serv.id}
-                  className={`flex flex-col lg:flex-row gap-16 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}
-                >
+                <div key={serv.id} className={`flex flex-col lg:flex-row gap-16 items-center ${index % 2 === 1 ? "lg:flex-row-reverse" : ""}`}>
                   {/* Service image */}
                   <div className="flex-1 aspect-16/10 w-full bg-gray-100 overflow-hidden border border-[#ECECEC] relative">
-                    <img
-                      src={serv.image}
-                      alt={serv.title}
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover"
-                    />
+                    <img src={serv.image} alt={serv.title} referrerPolicy="no-referrer" className="w-full h-full object-cover" />
                     <div className="absolute top-6 left-6 bg-white px-4 py-3 border border-[#ECECEC] flex items-center justify-center font-bold text-[#622219] font-mono shadow-sm uppercase text-xs">
-                      {serv.title.split(' ')[0]}
+                      {serv.title.split(" ")[0]}
                     </div>
                   </div>
 
                   {/* Service content */}
                   <div className="flex-1 space-y-6">
                     <span className="text-[10px] uppercase font-bold tracking-widest text-gray-400 font-mono">Service Module 0{index + 1}</span>
-                    <h2 className="font-sans text-2xl lg:text-3xl font-extrabold text-[#111111] uppercase tracking-tight leading-tight">
-                      {serv.title}
-                    </h2>
-                    <p className="text-gray-500 text-sm leading-relaxed font-light">
-                      {serv.longDescription}
-                    </p>
+                    <h2 className="font-sans text-2xl lg:text-3xl font-extrabold text-[#111111] uppercase tracking-tight leading-tight">{serv.title}</h2>
+                    <p className="text-gray-500 text-sm leading-relaxed font-light">{serv.longDescription}</p>
 
                     {/* Benefits checklist */}
                     <div className="space-y-3 pt-2">
@@ -1600,16 +1469,12 @@ export default function App() {
         {/* ========================================================= */}
         {/* PAGE: INVESTMENT GUIDE (YIELDS + LEGAL DIASPORA) */}
         {/* ========================================================= */}
-        {currentPage === 'invest' && (
+        {currentPage === "invest" && (
           <div id="invest-view" className="animate-fade-in max-w-[1440px] mx-auto px-6 lg:px-12 py-16 space-y-16">
             <div className="space-y-3">
               <span className="text-xs uppercase font-extrabold tracking-[0.3em] text-[#622219]">Wealth Guard</span>
-              <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-none">
-                Investment & Diaspora Advisory
-              </h1>
-              <p className="text-gray-500 text-sm max-w-xl font-light">
-                Providing sophisticated data tracking, transparent Escrow rules, and accurate Lagos valuation comparisons.
-              </p>
+              <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-none">Investment & Diaspora Advisory</h1>
+              <p className="text-gray-500 text-sm max-w-xl font-light">Providing sophisticated data tracking, transparent Escrow rules, and accurate Lagos valuation comparisons.</p>
             </div>
 
             {/* REAL INTERACTIVE ROI CALCULATOR COMPONENT */}
@@ -1626,16 +1491,16 @@ export default function App() {
               <div className="space-y-8">
                 <div className="space-y-3">
                   <span className="text-xs uppercase font-extrabold tracking-widest text-[#622219] block">Macroeconomic Drivers</span>
-                  <h3 className="font-sans text-2xl lg:text-3xl font-extrabold text-[#111111] leading-tight uppercase">
-                    Why Invest in Lagos Premium Enclaves?
-                  </h3>
+                  <h3 className="font-sans text-2xl lg:text-3xl font-extrabold text-[#111111] leading-tight uppercase">Why Invest in Lagos Premium Enclaves?</h3>
                 </div>
                 <div className="space-y-6 text-gray-500 text-sm font-light leading-relaxed">
                   <p>
-                    Lagos’ elite residential districts possess structural real estate behaviors that outperform traditional emerging market indexes. Because land space in peninsula regions like Banana Island and Ikoyi is structurally finite, competitive scarcity continues to drive land valuations up.
+                    Lagos’ elite residential districts possess structural real estate behaviors that outperform traditional emerging market indexes. Because land space in peninsula regions like Banana
+                    Island and Ikoyi is structurally finite, competitive scarcity continues to drive land valuations up.
                   </p>
                   <p>
-                    Additionally, rental demand from multinational energy networks, corporate consultancies, and luxury short-let managers commands high-yield, hard-currency payouts, insulating your landlord returns from standard currency devaluations.
+                    Additionally, rental demand from multinational energy networks, corporate consultancies, and luxury short-let managers commands high-yield, hard-currency payouts, insulating your
+                    landlord returns from standard currency devaluations.
                   </p>
                 </div>
 
@@ -1663,25 +1528,25 @@ export default function App() {
                 <div className="space-y-6">
                   {[
                     {
-                      step: '01',
-                      title: 'Verify Land Registry Coordinates',
-                      desc: 'Never rely on photos. We map coordinates directly at the Lagos State Lands Registry to confirm authentic Certificate of Occupancy (C of O) status.'
+                      step: "01",
+                      title: "Verify Land Registry Coordinates",
+                      desc: "Never rely on photos. We map coordinates directly at the Lagos State Lands Registry to confirm authentic Certificate of Occupancy (C of O) status.",
                     },
                     {
-                      step: '02',
-                      title: 'Establish Secure Escrow Accounts',
-                      desc: 'Funds are never wired directly to individual builders. Your capital is deposited in secure bank escrows with partner legal custodians.'
+                      step: "02",
+                      title: "Establish Secure Escrow Accounts",
+                      desc: "Funds are never wired directly to individual builders. Your capital is deposited in secure bank escrows with partner legal custodians.",
                     },
                     {
-                      step: '03',
-                      title: 'Independent Milestone Verification',
-                      desc: 'Developers receive payments in structured installments only after our civil engineers physically verify completion of carcass, roofing, and finishing.'
+                      step: "03",
+                      title: "Independent Milestone Verification",
+                      desc: "Developers receive payments in structured installments only after our civil engineers physically verify completion of carcass, roofing, and finishing.",
                     },
                     {
-                      step: '04',
-                      title: 'Governor’s Consent Processing',
-                      desc: 'We handle the complete statutory filing at the state government registry to ensure the deed of assignment is formally approved and registered.'
-                    }
+                      step: "04",
+                      title: "Governor’s Consent Processing",
+                      desc: "We handle the complete statutory filing at the state government registry to ensure the deed of assignment is formally approved and registered.",
+                    },
                   ].map((item, i) => (
                     <div key={i} className="flex gap-4 items-start">
                       <span className="font-mono text-[#622219] font-bold text-sm bg-white border border-[#ECECEC] w-8 h-8 flex items-center justify-center rounded-xs shrink-0">{item.step}</span>
@@ -1700,46 +1565,38 @@ export default function App() {
         {/* ========================================================= */}
         {/* PAGE: ABOUT (OUR HISTORY & TEAM) */}
         {/* ========================================================= */}
-        {currentPage === 'about' && (
+        {currentPage === "about" && (
           <div id="about-view" className="animate-fade-in max-w-[1440px] mx-auto px-6 lg:px-12 py-16 space-y-20">
             {/* Header */}
             <div className="space-y-3">
               <span className="text-xs uppercase font-extrabold tracking-[0.3em] text-[#622219]">Our History</span>
-              <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-none">
-                About London Homes
-              </h1>
-              <p className="text-gray-500 text-sm max-w-xl font-light">
-                Redefining transaction integrity, architectural selection, and luxury customer service in Lagos.
-              </p>
+              <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-none">About London Homes</h1>
+              <p className="text-gray-500 text-sm max-w-xl font-light">Redefining transaction integrity, architectural selection, and luxury customer service in Lagos.</p>
             </div>
 
             {/* Narrative with Drone photo side */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <div className="space-y-6">
                 <span className="text-xs uppercase font-extrabold text-[#622219] block">Digital Headquarters</span>
-                <h2 className="font-sans text-2xl lg:text-3xl font-extrabold text-[#111111] uppercase tracking-tight leading-tight">
-                  Earning Trust in High-Value Real Estate
-                </h2>
+                <h2 className="font-sans text-2xl lg:text-3xl font-extrabold text-[#111111] uppercase tracking-tight leading-tight">Earning Trust in High-Value Real Estate</h2>
                 <div className="space-y-4 text-gray-500 text-sm leading-relaxed font-light">
                   <p>
-                    London Homes was founded to challenge the status quo. In a marketplace heavily crowded by generic realtors promoting identical listings without legal due diligence, we saw an opportunity to introduce institutional-grade transparency and security.
+                    London Homes was founded to challenge the status quo. In a marketplace heavily crowded by generic realtors promoting identical listings without legal due diligence, we saw an
+                    opportunity to introduce institutional-grade transparency and security.
                   </p>
                   <p>
-                    Specializing exclusively in high-value enclaves across Lagos—including Ikoyi, Banana Island, Victoria Island, and Lekki Phase 1—we act as dedicated investment partners. Our clients are successful professionals, multi-national directors, and return diaspora investors who require premium representation.
+                    Specializing exclusively in high-value enclaves across Lagos—including Ikoyi, Banana Island, Victoria Island, and Lekki Phase 1—we act as dedicated investment partners. Our clients
+                    are successful professionals, multi-national directors, and return diaspora investors who require premium representation.
                   </p>
                   <p>
-                    We do not merely match you with a home; we verify titles, negotiate clean transaction pricing, secure payments through bank escrow accounts, and support you throughout the lifetime of your property holdings.
+                    We do not merely match you with a home; we verify titles, negotiate clean transaction pricing, secure payments through bank escrow accounts, and support you throughout the lifetime
+                    of your property holdings.
                   </p>
                 </div>
               </div>
 
               <div className="aspect-16/10 w-full bg-gray-100 overflow-hidden border border-[#ECECEC]">
-                <img
-                  src="/src/assets/images/hero_banana_island_1783963760466.jpg"
-                  alt="Banana Island drone photography"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover"
-                />
+                <img src="/src/assets/images/hero_banana_island_1783963760466.jpg" alt="Banana Island drone photography" referrerPolicy="no-referrer" className="w-full h-full object-cover" />
               </div>
             </div>
 
@@ -1752,17 +1609,17 @@ export default function App() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {[
                   {
-                    title: 'Discretion & Integrity',
-                    desc: 'We represent high-profile investors with absolute transaction confidentiality, secure escrow accounts, and direct legal representation.'
+                    title: "Discretion & Integrity",
+                    desc: "We represent high-profile investors with absolute transaction confidentiality, secure escrow accounts, and direct legal representation.",
                   },
                   {
-                    title: 'Fiduciary Responsibility',
-                    desc: 'We treat your capital as our priority. No inflated prices, no marketing exaggerations, only verified, data-backed ROI guides.'
+                    title: "Fiduciary Responsibility",
+                    desc: "We treat your capital as our priority. No inflated prices, no marketing exaggerations, only verified, data-backed ROI guides.",
                   },
                   {
-                    title: 'Scrupulous Safety',
-                    desc: 'Every property undergoes three layers of title verification at state registries to guarantee 100% clean title status.'
-                  }
+                    title: "Scrupulous Safety",
+                    desc: "Every property undergoes three layers of title verification at state registries to guarantee 100% clean title status.",
+                  },
                 ].map((val, idx) => (
                   <div key={idx} className="bg-[#F8F8F8] border border-[#ECECEC] p-8 space-y-4">
                     <span className="font-mono text-xs text-[#622219] font-bold block">PILLAR 0{idx + 1}</span>
@@ -1777,36 +1634,32 @@ export default function App() {
             <div className="space-y-12">
               <div className="text-center space-y-2 max-w-sm mx-auto">
                 <span className="text-xs uppercase font-bold text-[#622219]">Executive Council</span>
-                <h3 className="font-sans text-xl font-bold uppercase tracking-tight text-[#111111]">Corporate Leadership</h3>
+                <h3 className="font-sans text-xl font-bold uppercase tracking-tight text-[#111111]">MEET THE TEAM</h3>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 lg:gap-12">
                 {[
                   {
-                    name: 'Kofi Adeleke',
-                    role: 'Chief Executive Officer',
-                    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&h=300&q=80',
-                    desc: 'Over 15 years in high-value asset banking and luxury acquisitions across London and Lagos.'
+                    name: "Anthony London",
+                    role: "Chief Executive Officer",
+                    avatar: "/src/assets/images/ceo_img.png",
+                    desc: "5yrs+ in high-value asset banking and luxury acquisitions across London and Lagos.",
                   },
                   {
-                    name: 'Barr. Evelyn Onuoha',
-                    role: 'Head of Legal & Title Due Diligence',
-                    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&h=300&q=80',
-                    desc: 'Specialist in Lagos State land dispute resolution and statutory Governor’s Consent files processing.'
+                    name: "Kofi Adeleke",
+                    role: "Head of Legal & Title Due Diligence",
+                    avatar: "/src/assets/images/head-of-legal-and-title_img.png",
+                    desc: "Specialist in Lagos State land dispute resolution and statutory Governor's Consent files processing.",
                   },
                   {
-                    name: 'Michael Cole',
-                    role: 'Director of Portfolio Management',
-                    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&h=300&q=80',
-                    desc: 'Advising diaspora clients on strategic off-plan investment timings and rental yield optimizations.'
-                  }
+                    name: "Mitchell D.",
+                    role: "Digital Systems Engineer",
+                    avatar: "/src/assets/images/digital-systems-engineer_img.jpeg",
+                    desc: "Creating modern digital products that improve customer experience and business performance.",
+                  },
                 ].map((lead, idx) => (
                   <div key={idx} className="group bg-white border border-[#ECECEC] overflow-hidden flex flex-col h-full hover:border-[#622219]/30 transition-all">
                     <div className="aspect-square w-full bg-gray-100 overflow-hidden">
-                      <img
-                        src={lead.avatar}
-                        alt={lead.name}
-                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-                      />
+                      <img src={lead.avatar} alt={lead.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
                     </div>
                     <div className="p-6 space-y-2">
                       <h4 className="font-sans text-base font-bold text-gray-900">{lead.name}</h4>
@@ -1823,67 +1676,57 @@ export default function App() {
         {/* ========================================================= */}
         {/* PAGE: MEDIA (VIDEO TOURS & REELS) */}
         {/* ========================================================= */}
-        {currentPage === 'media' && (
+        {currentPage === "media" && (
           <div id="media-view" className="animate-fade-in max-w-[1440px] mx-auto px-6 lg:px-12 py-16 space-y-16">
             <div className="space-y-3">
               <span className="text-xs uppercase font-extrabold tracking-[0.3em] text-[#622219]">Cinematic Showcase</span>
-              <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-none">
-                Media & Video Gallery
-              </h1>
-              <p className="text-gray-500 text-sm max-w-xl font-light">
-                Examine detailed physical walk-throughs, construction drone captures, and client diaries captured live.
-              </p>
+              <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-none">Media & Video Gallery</h1>
+              <p className="text-gray-500 text-sm max-w-xl font-light">Examine detailed physical walk-throughs, construction drone captures, client diaries captured live, and many more stories.</p>
             </div>
 
             {/* VIDEO TOURS CARDS */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               {[
                 {
-                  id: 'vid-1',
-                  title: 'Waterfront Majesty: Banana Island Tour',
-                  duration: '05:22 mins',
-                  img: '/src/assets/images/hero_banana_island_1783963760466.jpg'
+                  id: "VuPsrZDFODA",
+                  title: "Touring an Ultra-Luxury 5 Bedroom Mansion in VGC Lagos | Pool, Cinema, Gym & Rooftop - ₦850M",
+                  duration: "12:09 mins",
+                  img: "/src/assets/images/Ultra-Luxury-5-Bedroom-Mansion-in-VGC-Lagos.png",
                 },
                 {
-                  id: 'vid-2',
-                  title: 'Sky Sanctum: Inside an Ikoyi Penthouse',
-                  duration: '04:15 mins',
-                  img: '/src/assets/images/luxury_ikoyi_penthouse_1783963776970.jpg'
+                  id: "ycNRiq7LAvM",
+                  title: "Massive Change Coming! Lekki-Ajah Road Rehabilitation & What It Means for Real Estate Buyers",
+                  duration: "09:35 mins",
+                  img: "/src/assets/images/Lekki-Ajah-Road-Rehabilitation_img.png",
                 },
                 {
-                  id: 'vid-3',
-                  title: 'Computational Intel: Lekki Smart Villa Tour',
-                  duration: '06:01 mins',
-                  img: '/src/assets/images/lekki_luxury_villa_1783963791103.jpg'
+                  id: "NW0zb4-71iA",
+                  title: "Factors to Consider When Buying a Home: A Comprehensive Guide",
+                  duration: "06:40 mins",
+                  img: "/src/assets/images/Factors-to-Consider-When-Buying-a-Home_img.png",
                 },
                 {
-                  id: 'vid-4',
-                  title: 'Off-Plan Focus: Victoria Island Towers Progress',
-                  duration: '03:40 mins',
-                  img: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80'
-                }
+                  id: "t241N6tcfAg",
+                  title: "Royal Garden Estate luxury home.",
+                  duration: "03:40 mins",
+                  img: "/src/assets/images/Royal-Garden-Estate-luxury-home_img.png",
+                },
               ].map((vid) => (
                 <div key={vid.id} className="group space-y-4">
                   <div className="relative aspect-video w-full bg-black overflow-hidden border border-[#ECECEC] shadow-md">
-                    <img
-                      src={vid.img}
-                      alt={vid.title}
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover opacity-80 group-hover:scale-103 transition-transform duration-700"
-                    />
+                    <img src={vid.img} alt={vid.title} referrerPolicy="no-referrer" className="w-full h-full object-cover opacity-80 group-hover:scale-103 transition-transform duration-700" />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <button
-                        onClick={() => setActiveVideoUrl('https://www.youtube.com/embed/dQw4w9WgXcQ')}
+                        onClick={() => setActiveVideoUrl(`https://www.youtube.com/embed/${vid.id}`)}
                         className="w-14 h-14 rounded-full bg-[#D11D1F] text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform cursor-pointer"
                         aria-label="Play Walkthrough"
                       >
                         <Play className="w-5 h-5 fill-white ml-0.5" />
                       </button>
                     </div>
-                    <span className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 text-[10px] text-white font-mono uppercase">
-                      {vid.duration}
-                    </span>
+                    <span className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md px-3 py-1 text-[10px] text-white font-mono uppercase">{vid.duration}</span>
                   </div>
+                  
                   <div className="space-y-1">
                     <h3 className="font-sans text-base font-bold text-gray-900 group-hover:text-[#622219] transition-colors">{vid.title}</h3>
                     <p className="text-gray-400 text-xs">Exclusively produced by London Homes Media division</p>
@@ -1903,28 +1746,24 @@ export default function App() {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 {[
                   {
-                    img: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80',
-                    tag: '#LagosKitchens'
+                    img: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80",
+                    tag: "#LagosKitchens",
                   },
                   {
-                    img: 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=600&q=80',
-                    tag: '#BananaPools'
+                    img: "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=600&q=80",
+                    tag: "#BananaPools",
                   },
                   {
-                    img: 'https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=600&q=80',
-                    tag: '#IkoyiBeds'
+                    img: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=600&q=80",
+                    tag: "#IkoyiBeds",
                   },
                   {
-                    img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80',
-                    tag: '#LekkiVillas'
-                  }
+                    img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80",
+                    tag: "#LekkiVillas",
+                  },
                 ].map((post, i) => (
                   <div key={i} className="group relative aspect-square bg-gray-100 overflow-hidden border border-[#ECECEC] cursor-pointer">
-                    <img
-                      src={post.img}
-                      alt="Instagram Style Post"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
+                    <img src={post.img} alt="Instagram Style Post" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                       <span className="font-mono text-xs text-white font-semibold">{post.tag}</span>
                     </div>
@@ -1938,13 +1777,11 @@ export default function App() {
         {/* ========================================================= */}
         {/* PAGE: INSIGHTS (BLOG ARTICLE LIST) */}
         {/* ========================================================= */}
-        {currentPage === 'blog' && (
+        {currentPage === "blog" && (
           <div id="insights-view" className="animate-fade-in max-w-[1440px] mx-auto px-6 lg:px-12 py-16 space-y-16">
             <div className="space-y-3">
               <span className="text-xs uppercase font-extrabold tracking-[0.3em] text-[#622219]">Market Intelligence</span>
-              <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-none">
-                Lagos Luxury Insights
-              </h1>
+              <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-none">Lagos Luxury Insights</h1>
               <p className="text-gray-500 text-sm max-w-xl font-light">
                 Examine technical market studies, legal title acquisition checklists, and off-plan investment strategies authored by our senior specialists.
               </p>
@@ -1956,26 +1793,19 @@ export default function App() {
                 <div key={art.id} id={`article-${art.id}`} className="grid grid-cols-1 lg:grid-cols-3 gap-12 items-start border-b border-[#ECECEC] pb-16 lg:pb-24">
                   {/* Article Banner image */}
                   <div className="lg:col-span-1 aspect-16/10 bg-gray-100 overflow-hidden border border-[#ECECEC]">
-                    <img
-                      src={art.image}
-                      alt={art.title}
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover"
-                    />
+                    <img src={art.image} alt={art.title} referrerPolicy="no-referrer" className="w-full h-full object-cover" />
                   </div>
 
                   {/* Article Text narrative */}
                   <div className="lg:col-span-2 space-y-6">
                     <div className="flex items-center space-x-3 text-xs">
-                      <span className="bg-[#622219]/5 text-[#622219] px-2.5 py-1 uppercase font-bold tracking-wider">
-                        {art.category}
+                      <span className="bg-[#622219]/5 text-[#622219] px-2.5 py-1 uppercase font-bold tracking-wider">{art.category}</span>
+                      <span className="font-mono text-gray-400">
+                        {art.date} • {art.readTime}
                       </span>
-                      <span className="font-mono text-gray-400">{art.date} • {art.readTime}</span>
                     </div>
 
-                    <h2 className="font-sans text-xl lg:text-2xl font-bold text-gray-900 leading-tight">
-                      {art.title}
-                    </h2>
+                    <h2 className="font-sans text-xl lg:text-2xl font-bold text-gray-900 leading-tight">{art.title}</h2>
 
                     <div className="space-y-4 text-gray-500 text-sm leading-relaxed font-light">
                       {art.content.map((p, idx) => (
@@ -1985,11 +1815,7 @@ export default function App() {
 
                     {/* Author block */}
                     <div className="flex items-center space-x-3 pt-4 border-t border-[#ECECEC] max-w-sm">
-                      <img
-                        src={art.author.avatar}
-                        alt={art.author.name}
-                        className="w-10 h-10 rounded-full object-cover"
-                      />
+                      <img src={art.author.avatar} alt={art.author.name} className="w-10 h-10 rounded-full object-cover" />
                       <div>
                         <h4 className="text-xs font-bold text-gray-900">{art.author.name}</h4>
                         <p className="text-gray-400 text-[10px]">{art.author.role}</p>
@@ -2005,17 +1831,13 @@ export default function App() {
         {/* ========================================================= */}
         {/* PAGE: CONTACT & FAQ */}
         {/* ========================================================= */}
-        {currentPage === 'contact' && (
+        {currentPage === "contact" && (
           <div id="contact-view" className="animate-fade-in max-w-[1440px] mx-auto px-6 lg:px-12 py-16 space-y-20">
             {/* Header */}
             <div className="space-y-3">
               <span className="text-xs uppercase font-extrabold tracking-[0.3em] text-[#622219]">Secure Office</span>
-              <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-none">
-                Contact & Inquiries
-              </h1>
-              <p className="text-gray-500 text-sm max-w-xl font-light">
-                Request private consultations, arrange accompanied chauffeured viewings, or dispatch custom briefs securely.
-              </p>
+              <h1 className="font-sans text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-gray-900 leading-none">Contact & Inquiries</h1>
+              <p className="text-gray-500 text-sm max-w-xl font-light">Request private consultations, arrange accompanied chauffeured viewings, or dispatch custom briefs securely.</p>
             </div>
 
             {/* CONTACT CODES & FORM SECTION */}
@@ -2035,19 +1857,18 @@ export default function App() {
                     <MapPin className="w-5 h-5 text-[#622219] shrink-0 mt-0.5" />
                     <div>
                       <strong>Office Address:</strong>
-                      <p className="text-gray-500 font-sans text-xs mt-1 leading-relaxed">
-                        Block 12, Plot 8, Admiralty Way, Lekki Phase 1, Lagos, Nigeria.
-                      </p>
+                      <p className="text-gray-500 font-sans text-xs mt-1 leading-relaxed">Block 12, Plot 8, Admiralty Way, Lekki Phase 1, Lagos, Nigeria.</p>
                     </div>
                   </div>
 
                   <div className="flex gap-4">
                     <Phone className="w-5 h-5 text-[#622219] shrink-0 mt-0.5" />
                     <div>
-                      <strong>Advisory Hotlines:</strong>
+                      <strong>Hotlines:</strong>
                       <p className="text-gray-500 text-xs mt-1 leading-relaxed">
-                        +234 (0) 803 123 4567 (Diaspora Hot Desk) <br />
-                        +234 (0) 805 999 8888 (Corporate Lease Desk)
+                        +234 (0) 803 265 9756{/* (Diaspora Hot Desk)  */}
+                        <br />
+                        +234 (0) 705 060 4442 {/* (Corporate Lease Desk) */}
                       </p>
                     </div>
                   </div>
@@ -2056,9 +1877,7 @@ export default function App() {
                     <Mail className="w-5 h-5 text-[#622219] shrink-0 mt-0.5" />
                     <div>
                       <strong>Electronic Correspondence:</strong>
-                      <p className="text-[#622219] text-xs mt-1 leading-relaxed font-sans">
-                        concierge@londonhomes.ng
-                      </p>
+                      <p className="text-[#622219] text-xs mt-1 leading-relaxed font-sans">concierge@londonhomes.ng</p>
                     </div>
                   </div>
 
@@ -2143,10 +1962,7 @@ export default function App() {
                       />
                     </div>
 
-                    <button
-                      type="submit"
-                      className="w-full bg-[#111111] hover:bg-[#622219] text-white text-xs font-semibold uppercase tracking-widest py-4 transition-colors cursor-pointer"
-                    >
+                    <button type="submit" className="w-full bg-[#111111] hover:bg-[#622219] text-white text-xs font-semibold uppercase tracking-widest py-4 transition-colors cursor-pointer">
                       Dispatch Secure Brief
                     </button>
                   </form>
@@ -2174,38 +1990,31 @@ export default function App() {
               <div className="max-w-3xl mx-auto space-y-4">
                 {[
                   {
-                    q: 'How does London Homes guarantee title security for returning diaspora?',
-                    a: 'Every property we list is subjected to a comprehensive three-tier title audit. This includes a physical inspection at the Lagos State Land Registry to cross-verify the Certificate of Occupancy (C of O), check for outstanding litigation files, and guarantee that the seller has absolute legal authority to convey the title.'
+                    q: "How does London Homes guarantee title security for returning diaspora?",
+                    a: "Every property we list is subjected to a comprehensive three-tier title audit. This includes a physical inspection at the Lagos State Land Registry to cross-verify the Certificate of Occupancy (C of O), check for outstanding litigation files, and guarantee that the seller has absolute legal authority to convey the title.",
                   },
                   {
-                    q: 'What is Governor’s Consent and why is it legally essential?',
-                    a: 'Under the Nigerian Land Use Act, all lands belong to the governor of each state, leased to citizens for 99 years. When purchasing from a private seller, statutory "Governor’s Consent" is required to transfer that leasehold. Our general legal counsel handles the complete processing at the state ministry to secure your title flawlessly.'
+                    q: "What is Governor’s Consent and why is it legally essential?",
+                    a: 'Under the Nigerian Land Use Act, all lands belong to the governor of each state, leased to citizens for 99 years. When purchasing from a private seller, statutory "Governor’s Consent" is required to transfer that leasehold. Our general legal counsel handles the complete processing at the state ministry to secure your title flawlessly.',
                   },
                   {
-                    q: 'Do you support third-party bank escrow systems?',
-                    a: 'Yes, absolutely. We do not encourage direct wiring of high-value funds to developer accounts. London Homes works with tier-1 partner banks (Access Bank, GTCO) to establish legal escrow frameworks. Capital is disbursed only when our independent engineers audit and approve specific construction milestones.'
+                    q: "Do you support third-party bank escrow systems?",
+                    a: "Yes, absolutely. We do not encourage direct wiring of high-value funds to developer accounts. London Homes works with tier-1 partner banks (Access Bank, GTCO) to establish legal escrow frameworks. Capital is disbursed only when our independent engineers audit and approve specific construction milestones.",
                   },
                   {
-                    q: 'How are chauffeured inspections managed for diaspora buyers?',
-                    a: 'We understand that visiting site locations in busy Lagos traffic can be stressful. We provide chauffeured, air-conditioned transport with private security escrows for physical viewings. For diaspora clients unable to travel, we host detailed 4K virtual tours, drone mappings, and legal consultations via secure video calls.'
-                  }
+                    q: "How are chauffeured inspections managed for diaspora buyers?",
+                    a: "We understand that visiting site locations in busy Lagos traffic can be stressful. We provide chauffeured, air-conditioned transport with private security escrows for physical viewings. For diaspora clients unable to travel, we host detailed 4K virtual tours, drone mappings, and legal consultations via secure video calls.",
+                  },
                 ].map((faq, idx) => (
-                  <div
-                    key={idx}
-                    className="border border-[#ECECEC] bg-[#F8F8F8]"
-                  >
+                  <div key={idx} className="border border-[#ECECEC] bg-[#F8F8F8]">
                     <button
                       onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
                       className="w-full p-6 text-left font-semibold text-gray-900 text-sm flex items-center justify-between focus:outline-none cursor-pointer"
                     >
                       <span className="uppercase tracking-tight">{faq.q}</span>
-                      <ChevronDown className={`w-4 h-4 text-[#622219] transition-transform duration-300 ${openFaq === idx ? 'rotate-180' : ''}`} />
+                      <ChevronDown className={`w-4 h-4 text-[#622219] transition-transform duration-300 ${openFaq === idx ? "rotate-180" : ""}`} />
                     </button>
-                    {openFaq === idx && (
-                      <div className="px-6 pb-6 pt-2 text-xs leading-relaxed text-gray-500 font-light border-t border-[#ECECEC]/30 bg-white">
-                        {faq.a}
-                      </div>
-                    )}
+                    {openFaq === idx && <div className="px-6 pb-6 pt-2 text-xs leading-relaxed text-gray-500 font-light border-t border-[#ECECEC]/30 bg-white">{faq.a}</div>}
                   </div>
                 ))}
               </div>
@@ -2224,11 +2033,7 @@ export default function App() {
       </div>
 
       {/* Global Inspection Booking Modal */}
-      <InspectionModal
-        isOpen={isInspectionModalOpen}
-        onClose={() => setIsInspectionModalOpen(false)}
-        selectedProperty={propertyForInspection}
-      />
+      <InspectionModal isOpen={isInspectionModalOpen} onClose={() => setIsInspectionModalOpen(false)} selectedProperty={propertyForInspection} />
 
       {/* Walkthrough Video Modal overlay */}
       {activeVideoUrl && (
@@ -2240,20 +2045,10 @@ export default function App() {
             <span>Close Player ×</span>
           </button>
           <div className="w-full max-w-4xl aspect-video bg-black shadow-2xl border border-white/10 rounded-sm overflow-hidden">
-            {activeVideoUrl.includes('.mp4') ? (
-              <video
-                src={activeVideoUrl}
-                controls
-                autoPlay
-                className="w-full h-full object-contain"
-              />
+            {activeVideoUrl.includes(".mp4") ? (
+              <video src={activeVideoUrl} controls autoPlay className="w-full h-full object-contain" />
             ) : (
-              <iframe
-                src={activeVideoUrl}
-                title="YouTube Walkthrough Player"
-                className="w-full h-full"
-                allowFullScreen
-              />
+              <iframe src={activeVideoUrl} title="YouTube Walkthrough Player" className="w-full h-full" allowFullScreen />
             )}
           </div>
         </div>
